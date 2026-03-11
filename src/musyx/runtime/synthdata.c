@@ -760,7 +760,7 @@ void* sndConvert32BitSDIRTo64BitSDIR(void* sdir_int) {
   {
     u32 min_extra = 0xFFFFFFFFu;
     u32 max_extra = 0;
-    for (i = 0; i < (s32)(n - 1); ++i) { /* n-1: skip terminator */
+    for (i = 0; i < n - 1; ++i) { /* n-1: skip terminator */
       if (sdir_inter[i].extraData != 0) {
         if (sdir_inter[i].extraData < min_extra) min_extra = sdir_inter[i].extraData;
         if (sdir_inter[i].extraData > max_extra) max_extra = sdir_inter[i].extraData;
@@ -768,9 +768,11 @@ void* sndConvert32BitSDIRTo64BitSDIR(void* sdir_int) {
     }
 
     if (max_extra > 0 && min_extra <= max_extra) {
-      /* Extra data: from min_extra to max_extra + sizeof(SNDADPCMinfo). */
+      /* Extra data: from min_extra to max_extra + sizeof(SNDADPCMinfo).
+       * SNDADPCMinfo is 40 bytes: u16 numCoef, u8×2, s16×2, s16[8][2]. */
+      const size_t kSndAdpcmInfoSize = 40;
       const size_t extra_start = (size_t)min_extra;
-      const size_t extra_bytes = (size_t)(max_extra - min_extra) + 40; /* 40 = sizeof(SNDADPCMinfo) */
+      const size_t extra_bytes = (size_t)(max_extra - min_extra) + kSndAdpcmInfoSize;
       const size_t new_extra_base = (size_t)n * sizeof(SDIR_DATA);
 
       sdir = (SDIR_DATA*)malloc(new_extra_base + extra_bytes);

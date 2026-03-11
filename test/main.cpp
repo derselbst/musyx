@@ -14,6 +14,7 @@
 
 #include <musyx/dspvoice.h>
 #include <musyx/musyx.h>
+#include <musyx/stream.h>
 
 #include <algorithm>
 #include <array>
@@ -446,7 +447,7 @@ static void byteswapSdirData(void* rawBuf, std::size_t size) {
   auto* inter = reinterpret_cast<SDIR_DATA_INTER*>(rawBuf);
   for (std::size_t i = 0; i < nEntries; ++i) {
     const uint32_t extraOff = inter[i].extraData; // already LE after the swap above
-    if (extraOff == 0 || extraOff + 40 > size) continue;
+    if (extraOff == 0 || extraOff + sizeof(SNDADPCMinfo) > size) continue;
     auto* ai = base + extraOff;
     bswap16p(ai + 0x00);                              // numCoef
     // initialPS (0x02) and loopPS (0x03) are single bytes – no swap needed
