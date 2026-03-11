@@ -6,6 +6,10 @@
 #include "musyx/synthdata.h"
 #include "musyx/voice.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct FILTERInfo {
   // total size: 0x6
   u8 on;     // offset 0x0, size 0x1
@@ -122,4 +126,9 @@ typedef struct DSPstudioinfo {
 extern DSPstudioinfo dspStudio[8];
 extern DSPvoice* dspVoice;
 extern bool dspCompressorOn;
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

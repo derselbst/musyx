@@ -4,6 +4,8 @@ project(MusyX)
 set(MUSY_TARGET MUSY_TARGET_PC)
 
 set(CMAKE_C_STANDARD 23)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(musyx STATIC
         src/musyx/runtime/seq.c
         src/musyx/runtime/synth.c
@@ -55,10 +57,10 @@ set_target_properties(musyx PROPERTIES RELWITHDEBINFO_POSTFIX RD)
 set_target_properties(musyx PROPERTIES MINSIZEREL_POSTFIX MIN)
 
 add_executable(test
-        test/main.c
+        test/main.cpp
 )
 
-target_link_libraries(test musyx m)
+target_link_libraries(test musyx m pthread)
 target_compile_options(test PRIVATE -fno-dce
         -fno-dse
         -fno-tree-dce

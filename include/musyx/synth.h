@@ -116,8 +116,7 @@ typedef struct CTRL_DEST {
   u8 numSource;
 } CTRL_DEST;
 
-#pragma push
-#pragma pack(4)
+#pragma pack(push, 4)
 typedef struct SYNTH_VOICE {
   // total size: 0x404
   SYNTH_QUEUE lowPrecisionJob;            // offset 0x0, size 0xC
@@ -270,7 +269,7 @@ typedef struct synthITDInfo {
   u8 sfx;   // offset 0x1, size 0x1
 } synthITDInfo;
 
-#pragma pop
+#pragma pack(pop)
 typedef void (*SYNTH_MESSAGE_CALLBACK)(u32, s32);
 
 extern SND_AUX_CALLBACK synthAuxACallback[8];
