@@ -29,6 +29,7 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <optional>
 #include <stdexcept>
 #include <string>
@@ -461,11 +462,11 @@ static void byteswapSdirData(void* rawBuf, std::size_t size) {
 
 static constexpr std::size_t ARR_PADDING = 512; // bytes appended to arrBuf
 
-static std::size_t findArrStart(const std::vector<uint8_t>& buf) {
+static std::size_t findArrStart(const uint8_t* data, std::size_t size) {
   const std::size_t ARR_SIZE = 0x58;
-  for (std::size_t off = 0; off + ARR_SIZE <= buf.size(); off += ARR_SIZE) {
-    const uint32_t tTab = readBE32(buf.data() + off + 0x00);
-    const uint32_t info = readBE32(buf.data() + off + 0x10);
+  for (std::size_t off = 0; off + ARR_SIZE <= size; off += ARR_SIZE) {
+    const uint32_t tTab = readBE32(data + off + 0x00);
+    const uint32_t info = readBE32(data + off + 0x10);
     // A valid ARR has tTab >= ARR_SIZE (track table follows the header) and
     // a non-zero info field (contains BPM and flags).
     if (tTab >= ARR_SIZE && info != 0) {
@@ -505,39 +506,65 @@ static void byteswapArrData(uint8_t* arr, std::size_t size, std::size_t paddingS
 
   // Swap tracktab (64 × u32 at arr+tTab) and all TENTRY arrays.
   // Collect the maximum TENTRY pattern index to know the pTab count.
+  //
+  // IMPORTANT: Multiple tracks can share overlapping TENTRY data.  A naïve
+  // per-track swap would byte-swap shared entries multiple times.  We therefore
+  // do this in two passes:
+  //   Pass A – read-only scan to determine maxPat (no mutations).
+  //   Pass B – swap tracktab u32s and TENTRY fields, using a high-water mark
+  //            so each TENTRY byte is mutated at most once.
+  // In both passes the while loop is guarded with `te < arr + pTab` so we never
+  // walk past the TENTRY region into the pTab array.
   uint32_t maxPat = 0;
 
   if (tTab + 64 * 4 <= size) {
     uint8_t* ttab = arr + tTab;
+    uint8_t* pTabLimit = arr + pTab; // first byte of pTab array – hard upper bound
+
+    // Pass A: read-only – collect maxPat from big-endian values still in buffer.
+    for (int ti = 0; ti < 64; ++ti) {
+      const uint32_t trackOff = readBE32(ttab + ti * 4); // still BE here
+      if (trackOff == 0 || arr + trackOff + TENTRY_SIZE > end) continue;
+
+      uint8_t* te = arr + trackOff;
+      while (te + TENTRY_SIZE <= end && te < pTabLimit) {
+        const uint16_t pat = readBE16(te + 0x08); // still BE
+        if (pat == 0xFFFF) break;
+        if (pat < 0xFFFE) maxPat = std::max(maxPat, static_cast<uint32_t>(pat));
+        te += TENTRY_SIZE;
+      }
+    }
+
+    // Pass B: swap tracktab entries and TENTRY arrays.
+    // Use hwm (high-water mark) to prevent double-swapping overlapping ranges.
+    // The pTabLimit guard prevents the hwm from advancing into the pTab array.
+    uint8_t* hwm = nullptr; // highest address we have already fully processed
     for (int ti = 0; ti < 64; ++ti) {
       const uint32_t trackOff = readBE32(ttab + ti * 4);
       bswap32p(ttab + ti * 4);
 
-      if (trackOff == 0 || arr + trackOff + TENTRY_SIZE > end) {
-        continue;
+      if (trackOff == 0 || arr + trackOff + TENTRY_SIZE > end) continue;
+
+      // Only process TENTRY entries that start at or after the hwm.
+      uint8_t* te = arr + trackOff;
+      if (hwm && te < hwm) {
+        te = hwm; // skip already-swapped entries
       }
 
-      // Walk and swap TENTRY array (terminated by pattern == 0xFFFF)
-      uint8_t* te = arr + trackOff;
-      while (te + TENTRY_SIZE <= end) {
-        const uint16_t pat = readBE16(te + 0x08);
+      while (te + TENTRY_SIZE <= end && te < pTabLimit) {
+        const uint16_t pat = readBE16(te + 0x08); // still BE at te >= hwm
 
         bswap32p(te + 0x00); // time (u32)
-        // te[4..7]: prgChange(u8), velocity(u8), res[2](u8) – no swap
         bswap16p(te + 0x08); // pattern (u16)
-        // te[10,11]: transpose(s8), velocityAdd(s8) – normally no swap
 
-        if (pat == 0xFFFF) {
-          break; // end of TENTRY array
-        }
-        if (pat == 0xFFFE) {
-          // Loop-back: the two s8 bytes (transpose/velocityAdd) encode a
-          // u16 loop-back index in big-endian byte order.
-          bswap16p(te + 0x0A);
-        } else if (pat < 0xFFFE) {
-          maxPat = std::max(maxPat, static_cast<uint32_t>(pat));
-        }
         te += TENTRY_SIZE;
+        if (hwm == nullptr || te > hwm) hwm = te;
+
+        if (pat == 0xFFFF) break;
+        if (pat == 0xFFFE) {
+          // Loop-back: the two s8 bytes encode a u16 loop-back index BE.
+          bswap16p(te - TENTRY_SIZE + 0x0A);
+        }
       }
     }
   }
@@ -707,7 +734,8 @@ int main(int argc, char* argv[]) {
     return 1;
   }
   // -------------------------------------------------------------------------
-  std::vector<uint8_t> projBuf, poolBuf, sampBuf, arrBuf, sdirVec;
+  std::vector<uint8_t> projBuf, poolBuf, sampBuf, sdirVec;
+  std::vector<uint8_t> arrFileData; // raw file contents, only used temporarily
 
   try {
     projBuf = LoadFile(opts->proj);
@@ -715,7 +743,7 @@ int main(int argc, char* argv[]) {
     sampBuf = LoadFile(opts->samp);
     sdirVec = LoadFile(opts->sdir); // loaded into a vector for easy byte-swapping
     if (opts->arr) {
-      arrBuf = LoadFile(*opts->arr);
+      arrFileData = LoadFile(*opts->arr);
     }
   } catch (const std::exception& e) {
     std::cerr << "Error loading files: " << e.what() << "\n";
@@ -740,12 +768,29 @@ int main(int argc, char* argv[]) {
   // artefact in GameCube-exported .son files) read as zeros rather than
   // causing a segfault.  byteswapArrData() also patches a NOTE_DATA terminator
   // into the padding for any SEQ_PATTERN entries that land there.
+  //
+  // NOTE: We deliberately use malloc() here rather than std::vector::resize()
+  // because AddressSanitizer marks the extra bytes added by resize() as
+  // "container-overflow" (poisoned), which causes a SEGV when the MusyX
+  // runtime accesses the padding.  A plain malloc'd allocation has no such
+  // annotation and allows the runtime to read the zeroed padding safely.
   std::size_t arrOffset = 0;
-  if (!arrBuf.empty()) {
-    arrOffset = findArrStart(arrBuf);
-    const std::size_t arrOriginalSize = arrBuf.size();
-    arrBuf.resize(arrOriginalSize + ARR_PADDING, 0); // extend BEFORE byte-swap
-    byteswapArrData(arrBuf.data() + arrOffset, arrOriginalSize - arrOffset, ARR_PADDING);
+  std::unique_ptr<uint8_t, decltype(&std::free)> arrExtBuf{nullptr, std::free};
+  if (!arrFileData.empty()) {
+    const std::size_t fileSize     = arrFileData.size();
+    const std::size_t extSize      = fileSize + ARR_PADDING;
+    uint8_t* raw = static_cast<uint8_t*>(std::malloc(extSize));
+    if (!raw) {
+      std::cerr << "Out of memory allocating ARR buffer\n";
+      return 1;
+    }
+    std::memcpy(raw, arrFileData.data(), fileSize);
+    std::memset(raw + fileSize, 0, ARR_PADDING);
+    arrFileData.clear(); // release original vector memory
+    arrExtBuf.reset(raw);
+
+    arrOffset = findArrStart(raw, fileSize); // scan original data only
+    byteswapArrData(raw + arrOffset, fileSize - arrOffset, ARR_PADDING);
   }
 
   // sndConvert32BitSDIRTo64BitSDIR() requires a malloc'd buffer (it calls
@@ -804,7 +849,7 @@ int main(int argc, char* argv[]) {
   // the project file.
   // arrPtr points to the actual ARR struct within the buffer (skipping the
   // leading zeroes present in .son files exported from MusyX tools).
-  void* arrPtr = arrBuf.empty() ? nullptr : static_cast<void*>(arrBuf.data() + arrOffset);
+  void* arrPtr = arrExtBuf ? static_cast<void*>(arrExtBuf.get() + arrOffset) : nullptr;
   const SND_SEQID seqId = sndSeqPlay(groupId, opts->songId, arrPtr, nullptr);
   if (seqId == SND_ID_ERROR) {
     std::cerr << "sndSeqPlay failed – verify that group " << groupId
