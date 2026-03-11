@@ -734,6 +734,32 @@ static void SortVoices(DSPvoice** voices, long l, long r) {
   SortVoices(voices, last + 1, r);
 }
 
+#if MUSY_TARGET != MUSY_TARGET_DOLPHIN
+/* Decode one Nintendo DSP ADPCM sample at sequential position smp_pos.
+ * Must be called in ascending order from position 0 — yn1/yn2 carry IIR state.
+ * coefs is the pb->adpcm.a table (stored as u16 but interpreted as s16). */
+static s16 salPCDecodeADPCM(const u8* data, u32 smp_pos, s16* yn1, s16* yn2,
+                             const u16 coefs[8][2]) {
+  u32 block  = smp_pos / 14;
+  u32 nibidx = smp_pos % 14;
+  u8  ps     = data[block * 8];
+  int ci     = (ps >> 4) & 7;
+  int sc     = 1 << (ps & 0xF);
+  u8  byte   = data[block * 8 + 1 + nibidx / 2];
+  /* Sign-extend the 4-bit nibble (high nibble first within each byte). */
+  int nib = (nibidx & 1) ? (int)(s8)((byte << 4) & 0xF0) >> 4
+                         : (int)(s8)( byte        & 0xF0) >> 4;
+  /* Coefs are stored as u16 but hold s16 values. */
+  int sample = nib * sc + (((s16)coefs[ci][0] * (int)*yn1 +
+                             (s16)coefs[ci][1] * (int)*yn2 + 1024) >> 11);
+  if (sample >  32767) sample =  32767;
+  if (sample < -32768) sample = -32768;
+  *yn2 = *yn1;
+  *yn1 = (s16)sample;
+  return (s16)sample;
+}
+#endif
+
 void salBuildCommandList(s16* dest, u32 nsDelay) {
 #if MUSY_TARGET == MUSY_TARGET_DOLPHIN
   static const u16 pbOffsets[9] = {10, 12, 24, 14, 16, 26, 18, 20, 22};
@@ -2007,7 +2033,173 @@ void salBuildCommandList(s16* dest, u32 nsDelay) {
   }
 #endif
 #else
-  // TODO implement for PC
+  /* ------------------------------------------------------------------
+   * PC software mixer: decode all active voices and mix into the
+   * studio's main buffers (L/R/S, each synthInfo.numSamples s32 values).
+   * ------------------------------------------------------------------ */
+  {
+    u8  st;
+    u32 n = synthInfo.numSamples; /* 160 samples per channel */
+
+    for (st = 0; st < salMaxStudioNum; ++st) {
+      DSPstudioinfo* stp = &dspStudio[st];
+      s32*           buf;
+      DSPvoice*      v;
+      DSPvoice*      next_v;
+      u32            i_out;
+
+      if (stp->state != 1) continue;
+
+      /* Zero the L/R/S mix buffer for this frame. */
+      buf = stp->main[salFrame];
+      memset(buf, 0, n * 3 * sizeof(s32));
+
+      for (v = stp->voiceRoot; v; v = next_v) {
+        next_v = v->next;
+
+        /* De-pop / explicit break: notify and remove voice. */
+        if (v->postBreak || (v->changed[0] & 0x20)) {
+          salSynthSendMessage(v, 0);
+          salDeactivateVoice(v);
+          continue;
+        }
+
+        /* Startup: transition state 1 → 2 and initialise playback state. */
+        if (v->state == 1) {
+          _PB* pb = v->pb;
+          u8   k;
+
+          v->playInfo.posHi       = v->smp_info.offset;
+          v->playInfo.posLo       = 0;
+          v->playInfo.pitch       = v->pitch[v->singleOffset];
+          pb->mix.vL              = v->lastVolL = v->volL;
+          pb->mix.vR              = v->lastVolR = v->volR;
+          pb->adpcm.yn1           = 0;
+          pb->adpcm.yn2           = 0;
+          pb->src.last_samples[0] = 0; /* last decoded sample = silence */
+
+          MUSY_DEBUG("  voice STARTUP: pitch=%u smpOff=%u compType=%u len=%u loop=%u loopLen=%u addr=%p vL=%u vR=%u\n",
+                     v->playInfo.pitch, v->smp_info.offset, v->smp_info.compType,
+                     v->smp_info.length, v->smp_info.loop, v->smp_info.loopLength,
+                     v->smp_info.addr, v->volL, v->volR);
+
+          if (v->smp_info.compType == 0 || v->smp_info.compType == 4 ||
+              v->smp_info.compType == 5) {
+            SNDADPCMinfo* ai = (SNDADPCMinfo*)v->smp_info.extraData;
+            if (ai) {
+              for (k = 0; k < 8; ++k) {
+                pb->adpcm.a[k][0] = ai->coefTab[k][0];
+                pb->adpcm.a[k][1] = ai->coefTab[k][1];
+              }
+              if (v->smp_info.loopLength > 0) {
+                pb->adpcmLoop.loop_yn2 = ai->loopY0;
+                pb->adpcmLoop.loop_yn1 = ai->loopY1;
+              }
+            }
+          }
+          v->state = 2;
+        }
+
+        if (v->state != 2) continue;
+
+        /* Key-off: stop the voice. */
+        if (v->changed[0] & 0x40) {
+          salSynthSendMessage(v, 0);
+          salDeactivateVoice(v);
+          continue;
+        }
+
+        /* Absorb pending pitch and volume updates. */
+        if (v->changed[0] & 8) {
+          v->playInfo.pitch = v->pitch[0];
+          v->changed[0] &= ~8u;
+        }
+        if (v->changed[0] & 1) {
+          v->pb->mix.vL = v->lastVolL = v->volL;
+          v->pb->mix.vR = v->lastVolR = v->volR;
+          v->changed[0] &= ~1u;
+        }
+
+        {
+          u32  pitch    = v->playInfo.pitch; /* 16.16 SRC ratio */
+          u32  pos_hi   = v->playInfo.posHi;
+          u32  pos_lo   = v->playInfo.posLo;
+          u32  smp_len  = v->smp_info.length;
+          u32  loop_st  = v->smp_info.loop;
+          u32  loop_len = v->smp_info.loopLength;
+          u8   comp     = v->smp_info.compType;
+          const u8* sdata = (const u8*)v->smp_info.addr;
+          s32  vol_l    = (s32)(s16)v->lastVolL;
+          s32  vol_r    = (s32)(s16)v->lastVolR;
+          _PB* pb       = v->pb;
+          s16  yn1      = pb->adpcm.yn1;
+          s16  yn2      = pb->adpcm.yn2;
+          /* Last decoded sample; reused when SRC doesn't advance the integer
+           * position (input rate < output rate). */
+          s16  cur      = (s16)pb->src.last_samples[0];
+          int  voice_done = 0;
+
+          for (i_out = 0; i_out < n; ++i_out) {
+            /* Fixed-point 16.16 SRC advance. */
+            u32 new_lo  = pos_lo + (pitch & 0xFFFFu);
+            u32 carry   = new_lo >> 16;
+            new_lo     &= 0xFFFFu;
+            u32 advance = (pitch >> 16) + carry;
+            pos_lo      = new_lo;
+
+            /* Decode 'advance' input samples to maintain IIR history. */
+            {
+              u32 k;
+              for (k = 0; k < advance; ++k) {
+                /* Handle loop boundary. */
+                if (loop_len > 0 && pos_hi >= loop_st + loop_len) {
+                  pos_hi = loop_st;
+                  yn1    = pb->adpcmLoop.loop_yn1;
+                  yn2    = pb->adpcmLoop.loop_yn2;
+                }
+                /* End of non-looping sample. */
+                if (pos_hi >= smp_len) {
+                  salSynthSendMessage(v, 0);
+                  salDeactivateVoice(v);
+                  voice_done = 1;
+                  break;
+                }
+                switch (comp) {
+                case 0: case 4: case 5:
+                  cur = salPCDecodeADPCM(sdata, pos_hi, &yn1, &yn2, pb->adpcm.a);
+                  break;
+                case 2: /* PCM16 */
+                  cur = ((const s16*)sdata)[pos_hi];
+                  break;
+                case 3: /* PCM8 – scale to 16-bit range */
+                  cur = (s16)((int)((const s8*)sdata)[pos_hi] << 8);
+                  break;
+                default:
+                  cur = 0;
+                  break;
+                }
+                ++pos_hi;
+              }
+            }
+            if (voice_done) break;
+
+            /* Accumulate into L and R mix buffers.
+             * <<1 so that max s16 * max vol (both 0x7FFF) reaches ~2^31,
+             * which the WAV writer recovers by right-shifting 16 bits. */
+            buf[i_out]     += (cur * vol_l) << 1;
+            buf[n + i_out] += (cur * vol_r) << 1;
+          }
+
+          /* Persist playback state across frames. */
+          v->playInfo.posHi       = pos_hi;
+          v->playInfo.posLo       = pos_lo;
+          pb->adpcm.yn1           = yn1;
+          pb->adpcm.yn2           = yn2;
+          pb->src.last_samples[0] = (u16)cur;
+        }
+      }
+    }
+  }
 #endif
 }
 

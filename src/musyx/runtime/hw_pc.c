@@ -83,7 +83,7 @@ bool salInitAi(SND_SOME_CALLBACK callback, u32 unk, u32* outFreq) {
     userCallback = callback;
     // AIRegisterDMACallback(salCallback);
     // AIInitDMA(OSCachedToPhysical(salAIBufferBase) + (salAIBufferIndex * 0x280), 0x280);
-    synthInfo.numSamples = 0x20;
+    synthInfo.numSamples = 0xa0; /* 160 samples per audio frame (= 5 * 32 sub-frames) */
     *outFreq = 32000;
     MUSY_DEBUG("MusyX AI interface initialized.\n");
     return TRUE;
