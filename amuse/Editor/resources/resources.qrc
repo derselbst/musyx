@@ -1,0 +1,49 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>IconImport.svg</file>
+        <file>IconKeymap.svg</file>
+        <file>IconLayers.svg</file>
+        <file>IconNew.svg</file>
+        <file>IconNewKeymap.svg</file>
+        <file>IconNewLayers.svg</file>
+        <file>IconNewSongGroup.svg</file>
+        <file>IconNewSoundGroup.svg</file>
+        <file>IconNewSoundMacro.svg</file>
+        <file>IconOpen.svg</file>
+        <file>IconSongGroup.svg</file>
+        <file>IconSoundGroup.svg</file>
+        <file>IconSoundMacro.svg</file>
+        <file>IconGroup.svg</file>
+        <file>IconNewGroup.svg</file>
+        <file>IconADSR.svg</file>
+        <file>IconNewADSR.svg</file>
+        <file>IconCurve.svg</file>
+        <file>IconNewCurve.svg</file>
+        <file>IconSoundMacroDelete.svg</file>
+        <file>IconSoundMacroDeleteHovered.svg</file>
+        <file>IconSoundMacroTarget.svg</file>
+        <file>IconSoundMacroTargetDisabled.svg</file>
+        <file>IconKill.svg</file>
+        <file>IconSample.svg</file>
+        <file>IconPaintbrush.svg</file>
+        <file>IconAdd.svg</file>
+        <file>IconRemove.svg</file>
+        <file>IconStop.svg</file>
+        <file>IconVolume0.svg</file>
+        <file>IconVolume1.svg</file>
+        <file>IconVolume2.svg</file>
+        <file>IconVolume3.svg</file>
+        <file>IconFX.svg</file>
+        <file>IconB.svg</file>
+        <file>IconA.svg</file>
+        <file>IconBack.svg</file>
+        <file>IconForward.svg</file>
+        <file>IconBackDisabled.svg</file>
+        <file>IconForwardDisabled.svg</file>
+    </qresource>
+    <qresource prefix="/bg">
+        <file>FaceGrey.svg</file>
+        <file>keyboard.svg</file>
+        <file>keyboard_last.svg</file>
+    </qresource>
+</RCC>

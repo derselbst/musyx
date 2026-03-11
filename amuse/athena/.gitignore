@@ -1,0 +1,25 @@
+# File types
+**/*.o
+**/*.a
+**/*.autosave
+**/*.zip
+**/*.html
+**/*.tar
+**/*.gz
+**/*.bz2
+**/*.so
+**/*.dll
+**/*.dylib
+**/*.user
+**/.directory
+**/.DS_Store
+PKGBUILD
+# Directories
+**/doc
+**/obj
+**/Makefile
+/build
+/out
+/cmake-build-*
+/.idea
+/.buildcache
