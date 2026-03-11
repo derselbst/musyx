@@ -7,13 +7,6 @@
 // This program automatically byte-swaps all multi-byte fields to native
 // (little-endian) order before passing the data to the MusyX library.
 //
-// NOTE: salBuildCommandList is currently a TODO stub in the PC target, so the
-//       mix buffers (dspStudio[0].main[]) are never filled with synthesised
-//       audio and the output WAV will therefore be silent.  All other MusyX
-//       subsystems (sequencer, synthesiser, ADSR envelopes, etc.) still run
-//       correctly.  Once salBuildCommandList is implemented for PC, this
-//       program will produce real audio without any further changes.
-//
 // Usage:
 //   test --proj <file> --pool <file> --samp <file> --sdir <file>
 //        [--arr <file>] [--group <id>] [--songid <id>]
@@ -418,13 +411,22 @@ static void byteswapPoolData(std::vector<uint8_t>& buf) {
 // SDIR_DATA_INTER = { u16 id, u16 ref_cnt, u32 offset, u32 addr,
 //                     SAMPLE_HEADER{u32×4}, u32 extraData }  (0x20 bytes each)
 // Terminated by id == 0xFFFF.
+// After the entries the file contains SNDADPCMinfo structs (one per sample
+// with compType ADPCM).  Each SDIR_DATA_INTER.extraData is a byte offset from
+// the start of the file buffer to the matching SNDADPCMinfo.
 
 static void byteswapSdirData(void* rawBuf, std::size_t size) {
-  auto* p   = static_cast<uint8_t*>(rawBuf);
-  auto* end = p + size;
+  auto* base = static_cast<uint8_t*>(rawBuf);
+  auto* p    = base;
+  auto* end  = base + size;
   while (p + 0x20 <= end) {
     const uint16_t id = readBE16(p);
     bswap16p(p + 0x00); // id
+    if (id == 0xFFFF) {
+      // Terminator: stop here — the bytes that follow are extra data
+      // (SNDADPCMinfo structs), not SDIR_DATA_INTER fields.
+      break;
+    }
     bswap16p(p + 0x02); // ref_cnt
     bswap32p(p + 0x04); // offset
     bswap32p(p + 0x08); // addr (u32 – will be widened to void* by sndConvert)
@@ -432,11 +434,25 @@ static void byteswapSdirData(void* rawBuf, std::size_t size) {
     bswap32p(p + 0x10); // SAMPLE_HEADER.length
     bswap32p(p + 0x14); // SAMPLE_HEADER.loopOffset
     bswap32p(p + 0x18); // SAMPLE_HEADER.loopLength
-    bswap32p(p + 0x1C); // extraData
-    if (id == 0xFFFF) {
-      break;
-    }
+    bswap32p(p + 0x1C); // extraData (byte offset into this buffer for SNDADPCMinfo)
     p += 0x20;
+  }
+  // Now p points at the terminator entry.  The number of real entries is:
+  const std::size_t nEntries = static_cast<std::size_t>(p - base) / 0x20;
+
+  // Byte-swap each SNDADPCMinfo block referenced by a real entry.
+  // SNDADPCMinfo layout: u16 numCoef, u8 initialPS, u8 loopPS,
+  //                      s16 loopY0, s16 loopY1, s16 coefTab[8][2]  (40 bytes)
+  auto* inter = reinterpret_cast<SDIR_DATA_INTER*>(rawBuf);
+  for (std::size_t i = 0; i < nEntries; ++i) {
+    const uint32_t extraOff = inter[i].extraData; // already LE after the swap above
+    if (extraOff == 0 || extraOff + 40 > size) continue;
+    auto* ai = base + extraOff;
+    bswap16p(ai + 0x00);                              // numCoef
+    // initialPS (0x02) and loopPS (0x03) are single bytes – no swap needed
+    bswap16p(ai + 0x04);                              // loopY0
+    bswap16p(ai + 0x06);                              // loopY1
+    for (int j = 0; j < 16; ++j) bswap16p(ai + 0x08 + j * 2); // coefTab[8][2]
   }
 }
 
@@ -882,10 +898,6 @@ int main(int argc, char* argv[]) {
   // frameIdx mirrors the internal salFrame variable which snd_handle_irq
   // toggles on every call.  The "just completed" buffer is therefore at
   // main[frameIdx ^ 1] after the toggle.
-  //
-  // IMPORTANT: salBuildCommandList (which fills these buffers) is currently
-  // a TODO stub for the PC target, so all samples will be zero until it is
-  // implemented.  The WAV file will be structurally correct but silent.
 
   const uint32_t totalFrames = (opts->duration * kSampleRate) / kSamplesPerFrame;
   std::cout << "Rendering " << opts->duration << "s  →  " << totalFrames << " frames  →  "

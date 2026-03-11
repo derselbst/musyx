@@ -67,6 +67,10 @@ static MEM_DATA* GetPoolAddr(u16 id, MEM_DATA* m) {
 
     m = (MEM_DATA*)((u8*)m + m->nextOff);
   }
+  /* Also check the last entry (sentinel) */
+  if (m->id == id) {
+    return m;
+  }
   return NULL;
 }
 

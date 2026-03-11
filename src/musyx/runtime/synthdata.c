@@ -3,6 +3,7 @@
 #include "musyx/hardware.h"
 #include "musyx/snd.h"
 #include "musyx/version.h"
+#include <string.h>
 
 static SDIR_TAB dataSmpSDirs[128];
 static u16 dataSmpSDirNum;
@@ -391,9 +392,9 @@ done:
 
   if (MUSY_VERSION <= MUSY_VERSION_CHECK(2, 0, 1) ? (sdir->ref_cnt == 0) : TRUE) {
 #if MUSY_VERSION <= MUSY_VERSION_CHECK(2, 0, 1)
-    sdir->addr = (void*)((size_t)sdir->offset + (s32)dataSmpSDirs[i].base);
+    sdir->addr = (void*)((size_t)sdir->offset + (size_t)dataSmpSDirs[i].base);
 #else
-    sdir->addr = (void*)((size_t)sdir->offset + (s32)sdirTab->base);
+    sdir->addr = (void*)((size_t)sdir->offset + (size_t)sdirTab->base);
 #endif
     header = &sdir->header;
     hwSaveSample(&header, &sdir->addr
@@ -612,7 +613,7 @@ MSTEP* dataGetMacro(u16 mid) {
     base = dataMacMainTab[main].subTabIndex;
     key.id = mid;
     if ((result = (MAC_SUBTAB*)sndBSearch(&key, &dataMacSubTabmem[base], dataMacMainTab[main].num,
-                                          8, maccmp)) != NULL) {
+                                          sizeof(MAC_SUBTAB), maccmp)) != NULL) {
       return result->data;
     }
   }
@@ -751,15 +752,58 @@ void* sndConvert32BitSDIRTo64BitSDIR(void* sdir_int) {
 
   ++n;
 
-  sdir = malloc(n * sizeof(SDIR_DATA));
+  /* Find the extents of the extra-data section (SNDADPCMinfo structs).
+   * The extraData field in each entry is a byte offset from the start of the
+   * original 32-bit SDIR buffer to the matching SNDADPCMinfo struct.
+   * We copy this extra-data section into the new buffer so that the
+   * extraData offsets remain valid after sdir_int is freed. */
+  {
+    u32 min_extra = 0xFFFFFFFFu;
+    u32 max_extra = 0;
+    for (i = 0; i < (s32)(n - 1); ++i) { /* n-1: skip terminator */
+      if (sdir_inter[i].extraData != 0) {
+        if (sdir_inter[i].extraData < min_extra) min_extra = sdir_inter[i].extraData;
+        if (sdir_inter[i].extraData > max_extra) max_extra = sdir_inter[i].extraData;
+      }
+    }
 
-  for (i = 0; i < n; ++i) {
-    sdir[i].id = sdir_inter[i].id;
-    sdir[i].ref_cnt = sdir_inter[i].ref_cnt;
-    sdir[i].offset = sdir_inter[i].offset;
-    sdir[i].addr = (void*)(size_t)sdir_inter[i].addr;
-    sdir[i].header = sdir_inter[i].header;
-    sdir[i].extraData = sdir_inter[i].extraData;
+    if (max_extra > 0 && min_extra <= max_extra) {
+      /* Extra data: from min_extra to max_extra + sizeof(SNDADPCMinfo). */
+      const size_t extra_start = (size_t)min_extra;
+      const size_t extra_bytes = (size_t)(max_extra - min_extra) + 40; /* 40 = sizeof(SNDADPCMinfo) */
+      const size_t new_extra_base = (size_t)n * sizeof(SDIR_DATA);
+
+      sdir = (SDIR_DATA*)malloc(new_extra_base + extra_bytes);
+
+      for (i = 0; i < n; ++i) {
+        sdir[i].id = sdir_inter[i].id;
+        sdir[i].ref_cnt = sdir_inter[i].ref_cnt;
+        sdir[i].offset = sdir_inter[i].offset;
+        sdir[i].addr = (void*)(size_t)sdir_inter[i].addr;
+        sdir[i].header = sdir_inter[i].header;
+        /* Update the extraData offset to point into the new buffer. */
+        if (sdir_inter[i].extraData != 0) {
+          sdir[i].extraData = (u32)(new_extra_base + (sdir_inter[i].extraData - extra_start));
+        } else {
+          sdir[i].extraData = 0;
+        }
+      }
+
+      /* Copy the extra-data bytes (SNDADPCMinfo structs) into the new buffer. */
+      memcpy((u8*)sdir + new_extra_base, (u8*)sdir_int + extra_start, extra_bytes);
+    } else {
+      /* No extra data. */
+      sdir = (SDIR_DATA*)malloc((size_t)n * sizeof(SDIR_DATA));
+
+      for (i = 0; i < n; ++i) {
+        sdir[i].id = sdir_inter[i].id;
+        sdir[i].ref_cnt = sdir_inter[i].ref_cnt;
+        sdir[i].offset = sdir_inter[i].offset;
+        sdir[i].addr = (void*)(size_t)sdir_inter[i].addr;
+        sdir[i].header = sdir_inter[i].header;
+        sdir[i].extraData = sdir_inter[i].extraData;
+      }
+    }
   }
 
   free(sdir_int);
