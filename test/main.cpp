@@ -484,9 +484,10 @@ static std::size_t findArrStart(const uint8_t* data, std::size_t size) {
   for (std::size_t off = 0; off + ARR_SIZE <= size; off += ARR_SIZE) {
     const uint32_t tTab = readBE32(data + off + 0x00);
     const uint32_t info = readBE32(data + off + 0x10);
-    // A valid ARR has tTab >= ARR_SIZE (track table follows the header) and
+    // A valid ARR has tTab >= ARR_SIZE (track table follows the header),
+    // tTab within the remaining file data (not a garbage large value), and
     // a non-zero info field (contains BPM and flags).
-    if (tTab >= ARR_SIZE && info != 0) {
+    if (tTab >= ARR_SIZE && tTab < (size - off) && info != 0) {
       return off;
     }
   }
@@ -630,12 +631,14 @@ static void byteswapArrData(uint8_t* arr, std::size_t size, std::size_t paddingS
       //             { u16 time, u8 key|0x80, u8 velocity }         (4 bytes special)
       // Terminated by key==0xFF && velocity==0xFF.
       uint8_t* nd = sp + SEQ_PAT_HDR;
+      bool nd_terminated = false;
       while (nd + 4 <= end) {
         bswap16p(nd + 0); // time (u16) – always swap
         const uint8_t key = nd[2];
         const uint8_t vel = nd[3];
 
         if (key == 0xFF && vel == 0xFF) {
+          nd_terminated = true;
           break; // terminator
         }
         if ((key & 0x80) || (key == 0 && vel == 0)) {
@@ -646,6 +649,13 @@ static void byteswapArrData(uint8_t* arr, std::size_t size, std::size_t paddingS
           }
           nd += 6; // 6-byte regular note
         }
+      }
+      // If the note data had no terminator within the original file, write one
+      // into the padding area so the sequencer doesn't walk off the end of the
+      // buffer reading zero-filled bytes as skip events.
+      if (!nd_terminated && nd + 4 <= extEnd) {
+        nd[0] = 0x00; nd[1] = 0x00; // time = 0
+        nd[2] = 0xFF; nd[3] = 0xFF; // key = 0xFF, vel = 0xFF  → terminator
       }
       // Pitch-bend and modulation streams are byte-granular – no swap needed.
     }
