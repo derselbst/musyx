@@ -59,6 +59,8 @@ add_executable(test
 )
 
 target_link_libraries(test musyx m)
+set_source_files_properties(test/main.c PROPERTIES LANGUAGE CXX)
+set_target_properties(test PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQUIRED YES)
 target_compile_options(test PRIVATE -fno-dce
         -fno-dse
         -fno-tree-dce
