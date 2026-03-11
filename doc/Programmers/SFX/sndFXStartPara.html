@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>sndFXStartPara</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndFXStartPara</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>SND_VOICEID sndFXStartPara(SND_FXID fid,u8 vol,u8 pan,u8 studio,u8 numPara,...);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function starts a sound effect and immediately sets some MIDI controller values. This call encapsulates a simple sound effect start and the setting of a number of MIDI controllers in one call. This not only simplifies the process, it avoids audible artifacts caused by the sound system and callback being issued before all MIDI controller values are set. Using multiple funciton calls can cause this problem.</P>
+
+<H3>Input:</H3>
+<P><P STYLE="margin-left:100px">SND_FXID<BR>
+Specifies the ID of the sound effect to be used.</P>
+
+<P STYLE="margin-left:100px">u8 vol<BR>
+Specifies the default volume to be used with this sound effect. This value may or may not be used by the sound effect. (0=Silence, 127=100%, 0xFF=Use default volume).</P>
+
+<P STYLE="margin-left:100px">u8 pan<BR>
+Specifies the default panning to be used with this sound effect. This value may or may not be used by the sound effect. (0=Left, 64=Center, 127=Right, 128=Surround (this is a legacy feature - do not use), 0xFF=Use default panning).</P>
+
+<P STYLE="margin-left:100px">u8 studio<BR>
+Specifies the studio to be used to play the sound effect.</P>
+
+<P STYLE="margin-left:100px">u8 *numPara<BR>
+Number of controller value pairs specified in the following ellipse.<BR>
+For each of these controllers, the controller ID and the value has to be specified. The value may be 7-bit or 14-bit depending on the controller ID.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>SND_ID_ERROR</CODE> if unsuccessful, a voice ID otherwise.</P>
+<P>
+
+</BODY>
+</HTML>

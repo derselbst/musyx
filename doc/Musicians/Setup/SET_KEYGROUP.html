@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<TITLE>SET_KEYGROUP</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>SET_KEYGROUP</B></H1><P>
+
+<P STYLE="margin-left:100px">Define keygroup to be used for the current voice.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>Key Group</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Kill Mode</FONT></TD>
+	<TD colspan=6 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x59</B></TD>
+	<TD width=100><B><I>KEYGROUP</I></B></TD>
+	<TD width=75><I>ID</I></TD>
+	<TD width=75><I>flag</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">By default, a voice does not belong to any 
+keygroup. SET_KEYGROUP puts the voice into a keygroup and defines what happens
+to all other active voices that belong to this keygroup. An ID value of 0
+indicates that no keygroup should be used; this value can be used to remove
+a voice from a keygroup.</P>
+
+<P STYLE="margin-left:100px">Keygroups are simply defined by an 8-bit 
+numerical value. Each time a voice is assigned to a keygroup. All such 
+detected voices will either be switched off immediately (<I>kill mode</I>
+=1) or sent a keyoff signal (<I>kill mode</I>=0). For example, this
+allows you to ensure that all hi-hats in a drum set behave as if they
+were actually a physical unit (i.e., any playing open hi-hat will be 
+stopped immediately if a closed hi-hat is played).</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>ID</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>ID representing a volume group (0 = none)</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>flag</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>
+	<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=50><FONT color=white>Value</FONT></TD>
+			<TD width=275><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>Sends keyoff to all members of the group.</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>Switches voices off.</TD>
+		  </TR>
+	</TABLE>
+  </TR>
+</TABLE>
+<P>
+<P>
+</BODY>
+</HTML>

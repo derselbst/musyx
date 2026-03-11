@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<TITLE>_SND_CHORUS_WORK</TITLE>
+</HEAD>
+
+<BODY>
+<H3>_SND_CHORUS_WORK</H3><P>
+<PRE>
+typedef struct _SND_CHORUS_WORK {
+	s32	*lastLeft[_SND_CHORUS_NUM_BLOCKS];
+	s32	*lastRight[_SND_CHORUS_NUM_BLOCKS];
+	s32	*lastSur[_SND_CHORUS_NUM_BLOCKS];
+	u8 	currentLast;
+	s32	oldLeft[4];
+	s32	oldRight[4];
+	s32	oldSur[4];
+					
+	u32	currentPosLo;
+	u32	currentPosHi;
+					
+	s32	pitchOffset;
+	u32	pitchOffsetPeriodCount;
+	u32	pitchOffsetPeriod;
+					
+	_SND_CHORUS_SRCINFO	src;
+			} _SND_CHORUS_WORK;
+</PRE>
+</BODY>
+</HTML>

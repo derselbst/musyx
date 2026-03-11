@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+<TITLE>sndSendMessage</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSendMessage</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndSendMessage(SND_VOICEID vid, s32 mesg);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">As its name implies, this function sends a message to a specified sound. The message consists of a 32-bit value. If the macro is designed to react to messages, this can be used to trigger certain changes in the sound.</P>
+
+<H3>Input:</H3>
+<P STYLE="margin-left:100px">SND_VOICEID vid<BR>
+Voice ID of the sound to which the message should be sent.</P>
+
+
+<P STYLE="margin-left:100px">s32 message<BR>
+The "message" to be sent.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if successful, <CODE>FALSE</CODE> otherwise. An example of a condition that would cause the call to fail would be if the voice ID is no longer active.</P>
+<P>
+
+</BODY>
+</HTML>

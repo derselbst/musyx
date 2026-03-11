@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<TITLE>sndActivateStudio</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndActivateStudio</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>void sndActivateStudio(u8 studio, bool isMaster);</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function creates a new studio.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">u8 studio<BR>
+This is a user-defined value between 1 and 8. This value specifies a unique studio. Note that zero is used for the default studio, SND_DEFAULT_STUDIO. The default studio cannot be activated or deactivated.</P>
+
+<P STYLE="margin-left:100px">bool isMaster<BR>
+<CODE>TRUE</CODE> or <CODE>FALSE</CODE></P>
+
+<P STYLE="margin-left:150px"><CODE>TRUE</CODE><BR>
+If <CODE>TRUE</CODE>, then the main bus of this studio will be added to the main bus of the default studio, <I>after</I> AUX processing of the default studio has occured. Thus, the AUX effects of the default studio will not be applied to the output of this studio.</P>
+
+<P STYLE="margin-left:150px"><CODE>FALSE</CODE><BR>
+If <CODE>FALSE</CODE>, then the destination of this studio must be specified by the <A href="sndAddStudioInput.html" target="view_frame">sndAddStudioInput()</A> function.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+
+</BODY>
+</HTML>

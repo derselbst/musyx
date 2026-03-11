@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>MOD2VIBRANGE</TITLE>
+</HEAD>
+
+<BODY>
+<H1>MOD2VIBRANGE</H1>
+
+<P STYLE="margin-left:100px">Modify vibrato range according to modulation input state.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Pitch</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Level note</font></TD>
+	<TD bgcolor=black text=white><font color=white>Level fine</font></TD>
+	<TD colspan=7 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x22</B></TD>
+	<TD width=100><B><I>MOD2VIBR</I></B></TD>
+	<TD width=100><I>keys</I></TD>
+	<TD width=100><I>cents</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Sets up the key and cents range to use when the modulation input should influence the vibrato range. A range equal to zero will disable the scale of the vibrato range by the modulation input. The values are signed.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>level</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Level in note-steps (+/-12).</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>levelfine</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Fine level (+/-99 cents).</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

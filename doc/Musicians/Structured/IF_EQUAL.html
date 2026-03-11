@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>IF_EQUAL</TITLE>
+</HEAD>
+
+<BODY>
+<H1>IF_EQUAL</H1>
+
+<P STYLE="margin-left:100px">Go to macrostep if the condition is true</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Structure</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Ctrl</font></TD>
+	<TD bgcolor=black text=white><font color=white>A==</font></TD>
+	<TD bgcolor=black text=white><font color=white>Ctrl</font></TD>
+	<TD bgcolor=black text=white><font color=white>B</font></TD>
+	<TD bgcolor=black text=white><font color=white>Not</font></TD>
+	<TD bgcolor=black text=white><font color=white>Sound Macro Step</font></TD>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x70</B></TD>
+	<TD width=100><B><I>If_EQUAL</I></B></TD>
+	<TD width=100><I>Var/Ctrl</I></TD>
+	<TD width=50><I>A</I></TD>
+	<TD width=100><I>Var/Ctrl</I></TD>
+	<TD width=50><I>B</I></TD>
+	<TD width=50><I>Not</I></TD>
+	<TD width=130><I>MacroStep</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">If the condition is <CODE>TRUE</CODE>, the execution of the SMaL program will be continued at <B>MacroStep</B>. A jump outside the current macro is not possible. The condition evaluated is a simple comparison of the values of variables A and B. If the <B>Not</B> field is "<CODE>OFF</CODE>," the condition is <CODE>TRUE</CODE></P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>Var/Ctrl</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Controller A switch (<CODE>OFF</CODE>=variable, <CODE>ON</CODE>=extended controller).</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>A</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Variable/Controller A.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>Var/Ctrl</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Controller B switch (<CODE>OFF</CODE>=variable, <CODE>ON</CODE>=extended controller).</TD>
+  </TR>
+
+  <TR>
+	<TD width=100 valign=top>B</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Variable/Controller B.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>Not</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Logical NOT</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>MacroStep</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Macrostep number to jump to inside the current macro.</TD>
+  </TR>
+</TABLE>
+<P>
+
+<P STYLE="margin-left:50px">See Also:</P>
+<P STYLE="margin-left:100px"><A href="Special/ADD_VARS.html">ADD_VARS</A><BR>
+<A href="IF_LESS.html">IF_LESS</A><P>
+<P>
+<P>
+<P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>RNDNOTE</TITLE>
+</HEAD>
+
+<BODY>
+<H1>RNDNOTE</H1>
+
+<P STYLE="margin-left:100px">Set random pitch.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Pitch</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Note Lo</font></TD>
+	<TD bgcolor=black text=white><font color=white>Detune</font></TD>
+	<TD bgcolor=black text=white><font color=white>Note Hi</font></TD>
+	<TD bgcolor=black text=white><font color=white>Fixed/Free</font></TD>
+	<TD bgcolor=black text=white><font color=white>Abs/Rel</font></TD>
+	<TD colspan=3 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x17</B></TD>
+	<TD width=100><B><I>RNDNOTE</I></B></TD>
+	<TD width=75><I>note-lo</I></TD>
+	<TD width=75><I>detune</I></TD>
+	<TD width=75><I>note-hi</I></TD>
+	<TD width=75><I>fix/free</I></TD>
+	<TD width=75><I>abs/rel</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Sets random pitch. <B>Note-lo</B> is the lower end of the range and <B>note-hi</B> is the upper end. The <B>detune</B> value, specified in cents, is added after the random pitch is calculated, but only if the <B>fix/free</B> flag is set to <CODE>OFF</CODE>. If the <B>fix/free</B> flag is set to <CODE>ON</CODE>, the pitch will be generated freely inside the range without respect to any key steps. If <B>rel/abs</B> is set, <B>note-lo</B> specifies how many keys below the current key the range should start, while <B>note-hi</B> defines the size of the upper range.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>note-lo</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Lower end of the range.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>detune</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Applies a detune after the note is calculated.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>note-hi</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Upper end of the range.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>fix/free</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD><CODE>OFF</CODE> = the random pitch is quantized to note values.<BR>
+	<CODE>ON</CODE> = the pitch is calculated freely within the range.</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

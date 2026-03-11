@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<TITLE>SND_AUX_INFO</TITLE>
+</HEAD>
+
+<BODY>
+<H3>SND_AUX_INFO</H3><P>
+<PRE>
+typedef struct SND_AUX_INFO {
+	union SND_AUX_DATA {
+		struct SND_AUX_BUFFERUPDATE {
+			s32	*left;
+			s32	*right;
+			s32	*surround;
+			} bufferUpdate;
+		struct SND_AUX_PARAMETERUPDATE {
+			u16	para[SND_AUX_NUMPARAMETERS];
+			} parameterUpdate;
+		} data;
+	} SND_AUX_INFO;
+</PRE>
+
+<P STYLE="margin-left:100px">This structure contains data needed to properly react to the 
+reason code passed by the function arguments in the <A href="../auxiliary/sndSetAuxProcessingCallbacks.html"
+target="view_frame">sndSetAuxProcessingCallbacks()</A>. 
+Depending on the code either the fields in the SND_AUX_BUFFERUPDATE structure or in the 
+SND_AUX_PARAMETERUPDATE are valid. Below find a list of all the fields.</P>
+
+
+<P STYLE="margin-left:100px">s32 *left<BR>
+Pointer to a buffer containing 5ms of 32KHz, 32 bit, 
+signed PCM audio data for the left channel. The buffer 
+serves as both input and output buffer for the algorithm.</P>
+
+<P STYLE="margin-left:100px">s32 *right<BR>
+Pointer to a buffer containing 5ms of 32KHz, 32 bit, 
+signed PCM audio data for the right channel. The buffer 
+serves as both input and output buffer for the algorithm.</P>
+
+<P STYLE="margin-left:100px">s32 *surround<BR>
+Pointer to a buffer containing 5ms of 32KHz, 32 bit, 
+signed PCM audio data for the surround channel. The buffer 
+serves as both input and output buffer for the algorithm.</P>
+
+<P STYLE="margin-left:100px">u16 para[SND_AUX_NUMPARAMETERS]<BR>
+New values for all parameters as reflected by newly received custom controller MIDI values.</P>
+
+</BODY>
+</HTML>

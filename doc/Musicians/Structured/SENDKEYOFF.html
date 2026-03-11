@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>SENDKEYOFF</TITLE>
+</HEAD>
+
+<BODY>
+<H1>SENDKEYOFF</H1>
+
+<P STYLE="margin-left:100px">Send a keyoff to the specified macro.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Structure</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Variable</font></TD>
+	<TD bgcolor=black text=white><font color=white>Last Started</font></TD>
+	<TD colspan=6 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x09</B></TD>
+	<TD width=100><B><I>SENDKEYOFF</I></B></TD>
+	<TD width=100><I>Var ID</I></TD>
+	<TD width=100><I>Last</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Sends a keyoff to the specified voice. The variable specified by <B>Var ID</B> must contain a valid VID. VIDs can be received by using GET_VID or the VID resulting from the last PLAY_MACRO command can be used implicitly by setting last to 1. Note that it is perfectly valid to pass the VID-error value as a VID. The SENDKEYOFF command will be treated as a NOP in that case.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100>Var ID</TD>
+	<TD width=50>=</TD>
+	<TD>The ID of a variable contianing the VID of the target voice.</TD>
+  </TR>
+</TABLE>
+<P STYLE="margin-left:50px">See also:</P>
+<P STYLE="margin-left:100px"><A href="setup/GET_VID.html">GET_VID</A></P>
+<P STYLE="margin-left:100px"><A href="SENDKEYOFF.html">SENDKEYOFF</A></P>
+<P>
+
+</BODY>
+</HTML>

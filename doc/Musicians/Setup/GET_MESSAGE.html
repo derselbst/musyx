@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>GET_MESSAGE</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>GET_MESSAGE</B></H1><P>
+
+<P STYLE="margin-left:100px">Get message received by macro.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>Variable</FONT></TD>
+	<TD colspan=7 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x2B</B></TD>
+	<TD width=100><B><I>GET_MESG</I></B></TD>
+	<TD width=90><I>var ID</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Retrieves message received by the current 
+macro and stores the value in the variable indicated by <B>Var ID</B>.
+If no message was received, the value will be 0. A 4-entry deep FIFO is
+available to receive multiple messages at once.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>Var ID</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>ID of variable to receive the message's value.
+  </TR>
+</TABLE>
+<P>
+<P>
+</BODY>
+</HTML>

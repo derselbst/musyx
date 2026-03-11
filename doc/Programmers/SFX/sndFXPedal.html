@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<TITLE>sndFXPedal</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndFXPedal</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndFXPedal(SND_VOICEID vid, u8 pedal);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function sets a new pedal state for the specified sound effect.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_VOICEID vid<BR>
+The voice ID obtained through <A href="sndFXStart.html" target="view_frame">sndFXStart()</A> or <A href="sndFXStartEx.html" target="view_frame">sndFXStartEX()</A>.</P>
+
+<P STYLE="margin-left:100px">u8 pedal<BR>
+The new pedal state. If the pedal controller is still mapped to the pedal input of the synthesizer (see <A href="../../Musicians/Setup/Pedal_Select.html" target="view_frame">Musician's Reference Guide</A>) a value lower than 0x3F will clear the pedal state, while a larger value will set it.
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if successful, <CODE>FALSE</CODE> otherwise.</P>
+<P>
+
+</BODY>
+</HTML>

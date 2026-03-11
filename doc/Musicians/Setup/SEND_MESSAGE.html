@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<TITLE>SEND_MESSAGE</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>SEND_MESSAGE</B></H1><P>
+
+<P STYLE="margin-left:100px">Send message to macro or voice.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>Mode</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Target ID</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Var ID</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Message</FONT></TD>
+	<TD colspan=4 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x2A</B></TD>
+	<TD width=100><B><I>SEND_MESG</I></B></TD>
+	<TD width=75><I>flag</I></TD>
+	<TD width=75><I>ID</I></TD>
+	<TD width=75><I>Var ID 1</I></TD>
+	<TD width=75><I>Var ID 2</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Sends a numerical value to another voice
+or type of macro. <B>Flag</B> controls the manner in which the target
+of the message is specified. If 0, the <B>ID</B> parameter will be
+used to identify a macro ID which should receive the message. All
+active macros of this type will receive the message. If 1, the <B>Var ID1</B>
+parameter is used to identify a variable which contains a VID that 
+identifies a single voice (and its children) as target for the message.</P>
+
+<P STYLE="margin-left:100px">The value send to the target is specified 
+by <I>Var ID</I>.</P>
+
+<P STYLE="margin-left:100px">Messages may be sent to the application 
+(which has to register a callback) by using the "macro mode" and a 
+macro ID of <CODE>0xFFFF</CODE>.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>flag</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>
+	<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=50><FONT color=white>Value</FONT></TD>
+			<TD width=200><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>ID parameter is macro ID</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>ID parameter is variable ID</TD>
+		  </TR>
+	</TABLE>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>ID</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>macro ID (if mode 0).</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>Var ID1</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>ID of variable containing a VID (if mode 1).</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>Var ID2</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>ID of variable containing value to be sent.</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+</BODY>
+</HTML>

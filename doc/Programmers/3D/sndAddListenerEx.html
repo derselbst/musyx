@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>	
+<TITLE>sndAddListenerEx</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndAddListenerEx</H2>
+<P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndAddListenerEx(SND_LISTENER *li, SND_FVECTOR 
+  *pos, SND_FVECTOR *dir, SND_FVECTOR *heading, SND_FVECTOR *up, f32 front_sur, 
+  f32 back_sur, f32 soundSpeed, f32 volPosOffset, u32 flags, u8 vol, SND_ROOM 
+  *room);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function adds a listener structure to the list 
+  of listeners. This function is identical to the <font face="Courier New, Courier, mono">sndAddListener()</font> 
+  API call, with the addition of the <font face="Courier New, Courier, mono">f32 
+  volPosOffset</font> argument.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_LISTENER *li
+Pointer to a <A href="../Defs/SND_LISTENER.html" target="view_frame">structure</A> defining the parameters of the listener to be added. All values are initialized by the called function. The structure is not copied by the function. It has to be kept around as long as the listener is active.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *pos<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the initial position of the listener.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *dir<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the initial movement direction of the listener.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *heading<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the initial normalized viewing direction of the listener.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *up<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the initial normalized up vector of the listener.</P>
+
+<P STYLE="margin-left:100px">f32 front_sur<BR>
+Distance at which an emitter will only be audible on the front channels.</P>
+
+<P STYLE="margin-left:100px">f32 back_sur<BR>
+Distance at which an emitter will only be audible on the surround channel.</P>
+
+<P STYLE="margin-left:100px">f32 soundSpeed<br>
+  Defines the speed of sound for use in Doppler effects. It's specified in "units" 
+  per second, and will depend on the game's world coordinate system.</P>
+<p style="margin-left:100px"></p>
+<P STYLE="margin-left:100px">f32 volPosOffset<br>
+  Specifies the distance from the listener at which the emitter will attain maximum 
+  volume. This value may be zero, which means that the emitter will be loudest 
+  when effectively 'inside' the listener. Note that Doppler and panning volumes 
+  are calculated using the absolute distance between listener and emitter (without 
+  consideration of the <i>volPosOffset</i> value).</P>
+<P STYLE="margin-left:100px">u32 flags<BR>
+  <I>Flags</I> contains one or more of the following flags:</P>
+
+<P STYLE="margin-left:150px"><A href="../Defs/SND_LISTENER_DEFAULT.html" target="view_frame">SND_LISTENER_DEFAULT</A><BR>
+No Doppler effect is calculated. The speed of sound does not need to be set, anymore. This mode should be chosen if more than one listener is specified.</P>
+
+<P STYLE="margin-left:150px"><A href="../Defs/SND_LISTENER_DOPPLERFX.html" target="view_frame">SND_LISTENER_DOPPLERFX</A><BR>
+Doppler effects are calculated.</P>
+
+<P STYLE="margin-left:100px">u8 vol<BR>
+  Overall volume value to be applied to all emitters that are audible to this 
+  listener.</P>
+
+<P STYLE="margin-left:100px">SND_ROOM *room<BR>
+Pointer to a <A href="../Defs/SND_ROOM.html" target="view_frame">room description</A>. For now, this pointer must be set to NULL.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if successful, <CODE>FALSE</CODE> otherwise.</P>
+
+</BODY>
+</HTML>

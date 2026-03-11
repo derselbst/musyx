@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<TITLE>PitchW_SELECT</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>PitchW_SELECT</B></H1><P>
+
+<P STYLE="margin-left:100px">Add a pitchwheel calculation component.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>MIDI Contr.</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Scale Percentage</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Combine uCode</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Var. Input</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Fine Scale</FONT></TD>
+	<TD colspan=3 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x42</B></TD>
+	<TD width=100><B><I>PitchW_SELECT</I></B></TD>
+	<TD width=125><I>ctrl</I></TD>
+	<TD width=125><I>scale</I></TD>
+	<TD width=100><I>comb</I></TD>
+	<TD width=125><I>var</I></TD>
+	<TD width=125><I>fine</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Selects an additional component for pitchwheel
+calculation. The first use of this command resets the default values to
+empty and adds the new component. All further calls add addtional 
+components. <B>Comb</B>=0 sets the value, <B>comb</B>=1 adds the 
+value, and <B>comb</B>=2 multiplies the old and new values.</P>
+
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>ctrl</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>The MIDI controller number/variable index (see below).</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>scale</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>A signed factor (-100000 to 10000) in percent.</TD>
+  </TR>
+  <TR>
+	<TD width=100>comb</TD>
+	<TD width=50>=</TD>
+	<TD>
+	<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=50><FONT color=white>Value</FONT></TD>
+			<TD width=275><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>set value from defined controller.</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>add value to current controller assignment.</TD>
+		  </TR>
+		  <TR>
+			<TD>2</TD>
+			<TD>multiply the old and new controllers.</TD>
+		  </TR>
+	</TABLE>
+	</TD>
+  </TR>
+  <TR>
+	<TD width=100>var</TD>
+	<TD width=50>=</TD>
+	<TD><TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=50><FONT color=white>Value</FONT></TD>
+			<TD width=275><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD><I>ctrl</I> specifies a MIDI controller number.</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD><I>ctrl</I> specifies a variable.</TD>
+		  </TR>
+	</TABLE>	
+  </TR>
+  <TR>
+	<TD>fine</TD>
+	<TD>=</TD>
+	<TD>An unsigned scaling factor (0 to 100 in percent with 1/100th percent
+	steps (applied together with the scale parameter)).</TD>
+</TABLE>	
+<P>
+<P STYLE="margin-left:50px">You may use all standard MIDI controller numbers,
+as well as the defined extensions detailed under <A href="VOL_SELECT.html#table">
+VOL_SELECT</A>.</P>
+<P>
+<P>
+</BODY>
+</HTML>

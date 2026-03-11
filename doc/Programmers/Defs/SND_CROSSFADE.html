@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>SND_CROSSFADE</TITLE>
+</HEAD>
+
+<BODY>
+<H3>SND_CROSSFADE</H3><P>
+<PRE>
+
+
+typedef struct SND_CROSSFADE {
+	<A href="Ids.html" target="view_frame">SND_SEQID</A>	seqId1;
+	u16		time1;
+			
+	<A href="Ids.html" target="view_frame">SND_SEQID</A>	seqId2;
+	u16		time2;
+	void		*arr2;
+	<A href="Ids.html" target="view_frame">SND_GROUPID</A>	gid2;
+	<A href="Ids.html" target="view_frame">SND_SONGID</A>	sid2;
+	u8		vol2;
+	u8		studio2;
+			
+	u32		trackMute2[2];	// Mute bits (see <A href="sndSeqMute.html" target="view_frame">sndSeqMute</A>)
+	u16		speed2;		// Initial speed (of new song)
+			
+	u8		flags;
+	} SND_CROSSFADE;
+
+</PRE>
+
+
+<P STYLE="margin-left:100px">The song specified by the ID passes in <I>seq_id1</I> will be faded down in the time specified by <I>time1</I>. <I>Flags</I> defines what is to be done to it at this moment.</P>
+
+<P STYLE="margin-left:150px">SND_CROSSFADE_STOP<BR>
+Stop song after fade down is finished.</P>
+
+<P STYLE="margin-left:150px">SND_CROSSFADE_PAUSE<BR>
+Pause song after fade down is finished.</P>
+
+<P STYLE="margin-left:150px">SND_CROSSFADE_MUTE<BR>
+Mute song after fade down (no voices will be allocated), but continue handling (playing) it.</P>
+
+<P STYLE="margin-left:100px">Other flags define how the new song is to be faded up.</P>
+
+<P STYLE="margin-left:150px">SND_CROSSFADE_CONTINUE<BR>
+The new song is in paused state. Continue playback from that position. The ID of that song must be specified in <I>seq_id2</I>, which is otherwise unused.</P>
+
+<P STYLE="margin-left:150px">SND_CROSSFADE_PAUSENEW<BR>
+The new song will be started, but immediatley put into paused state.</P>
+
+<P STYLE="margin-left:150px">SND_CROSSFADE_SPEED<BR>
+The new song will be started with a playback speed specified in the <I>speed2</I> field.</P>
+
+<P STYLE="margin-left:150px">SND_CROSSFADE_MUTENEW<BR>
+Start new song, but mute it completely, immediately after its start.</P>
+
+<P STYLE="margin-left:100px">In all cases where a completely new song is started the <I>arr2</I> field must be initialized with a pointer to the arrangement data. <I>Gid</I> must contain the ID of the group, which contains the settings for the new song. <I>Sid</I> contains the ID of the song itself.</P>
+
+<P STYLE="margin-left:100px">The volume at the end of the fade in <I>time2</I> is always to be specified in <I>vol2</I>.</P>
+
+<P STYLE="margin-left:150px">SND_CROSSFADE_SYNC<BR>
+Cross fades can be synchronized to certain points in a song. The musician can place special controllers into the MIDI data representing the song. If this flag is set, the cross fade will be delayed until the next controller of that type is detected</P>
+
+<P STYLE="margin-left:100px">Cross fades are controlled directly by the faders. If you reuse a fader while a cross fade is in progress, the cross fade may not succeed. This should rarely be necessary, though. On the ne hand the system's master faders can still be used, and on the other hand, each volume group has two faders: a standard fader and a so-called "pause" fader. The latter can be freely used, even if a cross fade is in progress.</P>
+
+<P STYLE="margin-left:100px"><B>Note:</B> One can easily forget about the <I>studio2</I> field. This field must be initialized by the user. Normally, the SND_STUDIO_DEFAULT constant is used.</P>
+
+</BODY>
+</HTML>

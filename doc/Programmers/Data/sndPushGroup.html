@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>sndPushGroup</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndPushGroup</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndPushGroup(voice *prj_data, SND_GROUPID gid, void *samples, void *sampdir, void *pool);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function pushes group data onto the soundstack. See Basic Architecture's <A href="../info/Basic.html#Data">Data Management</A> for more details.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">void *prj_data<BR>
+Pinter to project data.</P>
+
+<P STYLE="margin-left:100px">SND_GROUPID gid<BR>
+ID of the group to be pushed.</P>
+
+<P STYLE="margin-left:100px">void *samples<BR>
+Pointer to sample data/ID to reference data.</P>
+
+<P STYLE="margin-left:100px">void *sampdir<BR>
+Pointer to sample directory containing data to locate samples within the sample data.</P>
+
+
+<P STYLE="margin-left:100px">void *pool<BR>
+Pointer to pool data.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if successful, <CODE>FALSE</CODE> otherwise.</P>
+<P>
+
+</BODY>
+</HTML>

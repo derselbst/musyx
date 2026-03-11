@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<TITLE>ADD_VARS</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>ADD_VARS</B></H1><P>
+
+<P STYLE="margin-left:100px">Add variables.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Special</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>Ctrl</FONT></TD>
+	<TD bgcolor=black><FONT color=white>A==</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Ctrl</FONT></TD>
+	<TD bgcolor=black><FONT color=white>B+</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Ctrl</FONT></TD>
+	<TD bgcolor=black><FONT color=white>C</FONT></TD>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x60</B></TD>
+	<TD width=100><B><I>ADD_VARS</I></B></TD>
+	<TD width=75><I>Var/Ctrl</I></TD>
+	<TD width=50><I>A</I></TD>
+	<TD width=75><I>Var/Ctrl</I></TD>
+	<TD width=50><I>B</I></TD>
+	<TD width=75><I>Var/Ctrl</I></TD>
+	<TD width=50><I>C</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">The current values of variables <B>B</B> and <B>C</B> are added together and stored in variable <B>A</B>. The <B>Var/Ctrl</B> switches select whether a variable or a controller should be accessed. If a switch is set to <CODE>ON</CODE>, the corresponding value index is used as an extended controller number.</P>
+
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100>Var/Ctrl</TD>
+	<TD width=50>=</TD>
+	<TD>Controller A switch (<CODE>OFF</CODE> = Variable, <CODE>ON</CODE> = extended controller).</TD>
+  </TR>
+  <TR>
+	<TD width=100>A</TD>
+	<TD width=50>=</TD>
+	<TD>Variable / Controller A</TD>
+  </TR>
+  <TR>
+	<TD width=100>Var/Ctrl</TD>
+	<TD width=50>=</TD>
+	<TD>Controller B switch (<CODE>OFF</CODE> = Variable, <CODE>ON</CODE> = extended controller).</TD>
+  </TR>
+  <TR>
+	<TD width=100>B</TD>
+	<TD width=50>=</TD>
+	<TD>Variable / Controller B</TD>
+  </TR>
+  <TR>
+	<TD width=100>Var/Ctrl</TD>
+	<TD width=50>=</TD>
+	<TD>Controller C switch (<CODE>OFF</CODE> = Variable, <CODE>ON</CODE> = extended controller).</TD>
+  </TR>
+  <TR>
+	<TD width=100>C</TD>
+	<TD width=50>=</TD>
+	<TD>Variable / Controller C</TD>
+  </TR>
+</TABLE>	
+<P>
+
+<P STYLE="margin-left:50px"><B>About Variables:</B></P>
+<P STYLE="margin-left:100px">All variable-handling commands can work with extended MIDI controllers and variables. Variables are referenced by specifying an identifying number. Variables can be local or global. Local variables are accessible only from the current macro and are initialized to zero each time the macro is started. Global variables, by contrast, can be accessed by all macros and even the application program. They are initialized to zero only when the system is initialized.</P>
+
+<P STYLE="margin-left:100px">Local variables are identified by indices 0 to 15, while indices 16 to 31 specify global variables.</P>
+
+<P STYLE="margin-left:100px">All types of variables - including controllers - are handled as 16-bit signed values. All operations are saturated, meaning that results of mathematical operations are clipped against the maximum and minimum values.</P>
+
+<P STYLE="margin-left:100px">When writing to or reading from controllers, one must be aware that all controllers are handled as 14-bit values, even if they are just 8-bits in size. For example, a MIDI volume of 127 would be represented as 16256 (127*128). As a result, generalized routines can be written without having to watch out for all the different MIDI controller sizes.</P>
+
+<P STYLE="margin-left:100px">The 14-bit value is always used as an unsigned quantitiy; e.g. a neutral pitchbend position would be 8192, not 0.</P>
+
+<P STYLE="margin-left:100px">All extended MIDI controllers (with the exception of the two LFO's) are writeable; however, external MIDI data may overwrite these values at any time.</P>
+<P>
+</BODY>
+</HTML>

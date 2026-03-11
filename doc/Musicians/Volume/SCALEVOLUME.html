@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<TITLE>SCALEVOLUME</TITLE>
+</HEAD>
+
+<BODY>
+<H1>SCALEVOLUME</H1>
+
+<P STYLE="margin-left:100px">Scale the velocity to calculate a new volume for the current voice.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Volume</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Scale</font></TD>
+	<TD bgcolor=black text=white><font color=white>Add</font></TD>
+	<TD bgcolor=black text=white><font color=white>Table-ID (Curve)</font></TD>
+	<TD bgcolor=black text=white><font color=white>Org Vol.</font></TD>
+	<TD colspan=6 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x0D</B></TD>
+	<TD width=100><B><I>SCALEVOLUME</I></B></TD>
+	<TD width=75><I>Scale</I></TD>
+	<TD width=75><I>Add</I></TD>
+	<TD width=150><I>curve</I></TD>
+	<TD width=100><I>org. vel</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Calculates a new volume for the current voice by scaling the velocity. The velocity is passed to the macro either by the sequencer (via MIDI), or by the effect handler. A <B>scale</B> of 127 equals 100%. Smaller values scale down and larger values scale up. In addition to the simple scale, an offset can be specified in the <B>add</B> parameter. The result of this calculation can be passed through a <B>curve</B> that will act as a translation table (a value of zero in the <B>curve</B>parameter will disable this feature). The new volume is calculated using either the current velocity (<B>org.vel</B>=0) or the original velocity (<B>org.vel</B>=1).</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>scale</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>The scaling factor of the velocity.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>add</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>A fixed offset that can be added to the volume.<P></TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>curve</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Table ID of a volume translation curve (0=linear).<P></TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>org.vel</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>If this switch is set to <CODE>ON</CODE>, the initial velocity that was set when the  <BR>	
+	macro was started is used instead of the current velocity/volume.<P></TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

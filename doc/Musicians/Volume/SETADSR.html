@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>SETADSR</TITLE>
+</HEAD>
+
+<BODY>
+<H1>SETADSR</H1>
+
+<P STYLE="margin-left:100px">Start a sample</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Volume</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Table-ID (ADSR)</font></TD>
+	<TD bgcolor=black text=white><font color=white>Type</font></TD>
+	<TD colspan=6 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x0C</B></TD>
+	<TD width=100><B><I>SETADSR</I></B></TD>
+	<TD width=100><I>Table</I></TD>
+	<TD width=100><I>TypeID</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">The data from the specified table define an ADSR to be used with the voice. The editor presents a graphical edit dialog to define tables containing the needed data if it is a MusyX-type ADSR.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>table</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>This references the ID of the table that contains the ADSR.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>typeid</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Defines the ADSR type.<P>
+		<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=75><FONT color=white>Type</FONT></TD>
+			<TD width=150><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>MusyX linear ADSR</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>exp. DLS type ADSR</TD>
+		  </TR>
+		</TABLE>
+	</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

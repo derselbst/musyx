@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>sndUpdateEmitter</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndUpdateEmitter</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndUpdateEmitter(SND_EMITTER *em, SND_FVECTOR *pos, SND_FVECTOR *dir,  u8 maxVol, SND_ROOM *room);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function updates an emitter structure.</P>
+
+<P STYLE="margin-left:100px">SND_EMITTER *em<BR>
+Pointer to a <A href="../Defs/SND_EMITTER.html" target="view_frame">sturcture</A> containing the current settings of the emitter.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *pos<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the new position of the emitter.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *dir<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the new movement direction of the emitter.</P>
+
+<P STYLE="margin-left:100px">u8 maxvol<BR>
+Volume to be used at the postition of the listener for this emitter.</P>
+
+<P STYLE="margin-left:100px">SND_ROOM *room<BR>
+A pointer to a <A href="../Defs/SND_ROOM.html" target="view_frame">structure</A> that describes a room's properties. Currently not supported, this value should be set to NULL.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if successful, <CODE>FALSE</CODE> otherwise.</P>
+
+</BODY>
+</HTML>

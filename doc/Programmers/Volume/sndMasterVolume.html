@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>sndMasterVolume</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndMasterVolume</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>void sndMasterVolume (u8 volume, u16 time, u8 music, u8 fx)</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function sets the current volume for the master faders of music or sfx. The volume may be set at once or may be faded to the new setting. A fade does not need to be finished before a new one can be started.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">u8 volume<BR>
+Specifies the volume to be used for set/fade. <CODE>0</CODE>=Silence, <CODE>127</CODE>=100%.</P>
+
+<P STYLE="margin-left:100px">u16 time<BR>
+Specifies the time in ms to fade to the new volume. If zero is specified, the volume will be set immediately. This may result in clicking sounds.</P>
+
+<P STYLE="margin-left:100px">u8 music</BR>
+Set to <CODE>TRUE</CODE> if music master fader should be affected.</P>
+
+<P STYLE="margin-left:100px">u8 sfx<BR>
+Set to <CODE>TRUE</CODE> if sfx master fader should be affected.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>

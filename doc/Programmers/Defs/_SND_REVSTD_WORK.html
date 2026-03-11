@@ -1,0 +1,23 @@
+<HTML>
+<HEAD>
+<TITLE>_SND_REVSTD_WORK</TITLE>
+</HEAD>
+
+<BODY>
+<H3>_SND_REVSTD_WORK</H3><P>
+<PRE>
+typedef struct _SND_REVSTD_WORK {
+	_SND_REVSTD_DELAYLINE	AP[6];
+	_SND_REVSTD_DELAYLINE	C[6];
+	f32			allPassCoeff;
+	f32			combCoef[6];
+	f32			lpLastout[3];
+	f32			level;
+	f32			damping;
+	s32			preDelayTime;
+	f32			*preDelayLine[3];
+	f32			*preDelayPtr[3];
+			} _SND_REVSTD_WORK;
+</PRE>
+</BODY>
+</HTML>

@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>SND_AUX_DELAY</TITLE>
+</HEAD>
+
+<BODY>
+<H3>SND_AUX_DELAY</H3><P>
+<PRE>
+typedef struct SND_AUX_DELAY {
+	u32		currentSize[3];
+	u32		currentPos[3];
+	u32		currentFeedback[3];
+	u32		currentOutput[3];
+				
+	s32		*left;
+	s32		*right;
+	s32		*sur;
+				
+	// - - - - - - - - - - -
+				
+	u32		delay[3];	// Delay buffer length in ms per channel
+	u32		feedback[3];	// Feedback volume in % per channel
+	u32		output[3];	// Output volume in % per channel
+	} SND_AUX_DELAY;
+
+</PRE>
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<TITLE>Basic Architecture</TITLE>
+</HEAD>
+
+<BODY>
+<H3><CENTER><FONT color=blue>Musy</FONT><FONT color=red>X</FONT> Terms Defined</CENTER></H3><HR>
+
+Here is a list of terms used in MusyX documentation, and their definitions:
+
+<UL>		
+	<LI><A name="Sound">Sound</A> - Both SFX and musical intruments are called sounds. They have the same label because they are defined in the same way. The only difference between both is the way they are linked into the data structures. Sounds are defined using any combination of layers, keymaps or macros. The programmer never rerferences sounds directly.</LI><P>
+
+	<LI><A name="Macro">Macro</A> - Macros are small simple programs designed by the musician or sound effects designer using the programming language SMaL. These programs control the sound generation for a single voice. All data that the programmer passes to a sound (sound effect or musical instrument) are passed through this program (directly or indirectly), and the macro therefore has the final control over what actually happens.</LI><P>
+
+	<LI><A name="Layer">Layer</A> - Layers are used by the musician or sound effects designer to start any number of macros mapped to a certain key or key range. This is mostly transparent to the programmer and mostly not of interest.</LI><P>
+
+	<LI><A name="Keymap">Keymap</A> - A keymap works much like a layer, but it only can map a single macro to a single key. As for layers, this is transparent for the programmer, and therefor not important.</LI><P>
+
+	<LI><A name="Key">Key</A> - In MusyX, "key" usually refers to the MIDI key used to trigger an instrument or even sound effect. The MIDI standard defines 128 keys that map directly to the keys on the keyboard of a synthesizer, so they ultimately represent musical notes. Lower key numbers represent lower tones. Since sound effects and instruments are basically identical in MusyX, sound effects know about keys, too. It's up tot he musician to decide if the key actually triggers a change in the frequency of the effect or not.</LI><P>
+
+	<LI><A name="Table">Table</A> - Tables are used within MusyX to store various types of data. This ranges from reverb setups over volume translation tables to ADSR curves used with musical instruments and some sound effects. Programmers mostly do not get into direct contact with this kind of data.</LI><P>
+
+	<LI><A name="Group">Group</A> - A group is a primary collection of data. There are two types of groups within MusyX: song groups and sound effect groups. Whilet he former stores all logical data to playback a group of songs, the latter does the same for a group of sound effects. Most of the actual data (like macros or samples) are stored in other locations, though.</LI><P>
+
+	<LI><A name="Pool">Pool</A> - The pool stores most of the actual data needed by MusyX. This data entity contains macros, layers, keymaps, and tables needed by a certain group of groups.</LI><P>
+
+	<LI><A name="SDIR">Sample Directory (SDIR)</A>  - The Sample directory contains the logical part of the sample data. It is seperated from the actual sample data to allow it to remain in main RAM, while the sample data is uploaded into ARAM.</LI><P>
+
+	<LI><A name="SampleData">Sample Data</A> - this is the actual sample data as needed by the hardware. MusyX Dolphin supports various sample formats: 8-bit PCM, 16-bit PCM, ADPCM and ADPCM "plus." The latter is identical to the standard ADPCM format, but it contains additional data that allow starting the playback on most positions inside the sample, as opposed to always starting at the beginning. All sample formats support arbitrary sample loop positions asn sizes as well as sample lengths.</LI><P>
+
+	<LI><A name="Song">Song</A> - Song data contain the data needed to playback a certain piece of music using the sequencer. Although the format is not compatible, one may think of it as MIDI data.</LI><P>
+
+	<LI><A name="SoundStack">Sound Stack</A> - The sound stack is used to manage the data currently loaded into the run-time library in an efficient way. Each group that is  supposed to be known to the system has to be pushed onto this stack. Once a group is no longer needed it has to be popped off the stack to remove it from the system. The system will use the information stored inside the groups to reference all other data needed from the pool, smaple directory, and sample data. The order in which groups are pushed ontot he stack can define some dependency among the groups. Once a group has introduced a certain data entity to the system, other groups will reference the first instance that has been made know to the system. For example, a certain sample will only be inserted once intot he ARAM. The stack structure was also chosen to avoid any fragmentation of the ARAM sample memory.</LI><P>
+
+	<LI><A name="Synthesizer">Synthesizer</A> - The synthesizer handles all aspects of the actual sound reproduction. It also runs the macros and controls the sound effects.</LI><P>
+
+	<LI><A name="Sequencer">Sequencer</A> - The sequencer plays back sond data and passes the instruments to be played on to the synthesizer. Multiple instances of the sequencer may be active at once to allow for cross fades, etc.</LI><P>
+
+	<LI><A name="VolumeGroup">Volume groups</A> - Volume groups are totally different from the "groups" defined above. Volume groups can be thought of as being a fader on a big mixer. They are used to influence the volume of a number of sound effects or instruments with one single volume control. By default, MusyX uses on volume group for all sound effects and one for each instance of the sequencer. The programmer may introduce as many volume groups as needed for groups of sound effects or groups of tracks within a piece of music (each song can have up to 64 tracks defined by the musician).</LI><P>
+
+	<LI><A name="Studio">Studio</A> - A studio is a collection of voices that share two auxiliary busses. Multiple studios may be active at any given time. Each studio can mix its output either into another studio or into the main output bus or even into both. Inputs from one studio into another can use volume control on each channel (left, right, surround). By default, just one studio is active. This studio can never be deactivated.</LI><P>
+
+</UL>
+
+
+<P>
+<P>
+<BODY>
+</HTML>

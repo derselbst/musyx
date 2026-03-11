@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>sndSeqMute</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSeqMute</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>void sndSeqMute(SND_SEQID sequid, u32 mask1, u32 mask2);</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function mutes/demutes single tracks from the sequencer file. The 64 tracks are represented by 2 u32s.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px"><A href="../Defs/Ids.html" target="view_frame">SND_SEQID</A><BR>
+ID that specifies which sequencer is to be affected.</P>
+
+<P STYLE="margin-left:100px">mask1<BR>
+Mute mask for the lower 32 tracks. A 0 mutes the corresopnding channel.</P>
+
+<P STYLE="margin-left:100px">mask2<BR>
+Mute mask for the upper 32 tracks. A 0 mutes the corresopnding channel.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>sndStreamAlloc</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndStreamAlloc</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>u32 sndStreamAlloc(u8 prio, void *buffer, u32 size, u32 frq, u8 vol, u8 pan, u8 span, u8 fxvol, u32 (*update_function) (void *buffer1, u32 len1, void *buffer2, u32 len2, u32 user), u32 user);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function allocates a stream buffer in ARAM. The function will immediately activate the buffer for streaming by allocating a voice. The update function specified will be called in approximately 20ms intervals.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">u8 prio
+Priority to be used for allocating the voice to be used for playing the stream. To guarantee allocation, the priority should be chosen as high as possible (255).</P>
+
+<P STYLE="margin-left:100px">void *buffer<BR>
+Pointer to buffer in MRAM allocated by the application. The neccesary size can be inquired by calling <A href="sndStreamAllocLength.html" target="view_frame">sndStreamAllocLength()</A>.</P>
+
+<P STYlE="margin-left:100px">u32 size<BR>
+Size of the ring buffer in samples.</P>
+
+<P STYlE="margin-left:100px">u32 frq<BR>
+Frequency in Hz to be used for playback.</P>
+
+<P STYlE="margin-left:100px">u8 vol<BR>
+Volume used for playback (0-127).</P>
+
+<P STYlE="margin-left:100px">u8 pan<BR>
+Panning used for playback (0-127).</P>
+
+<P STYlE="margin-left:100px">u8 span<BR>
+Surround panning used for playback (0-127).</P>
+
+<P STYlE="margin-left:100px">u8 fxvol<BR>
+Reverb (AuxA) volume used for playback (0-127).</P>
+
+<P STYlE="margin-left:100px">u8 (*update_function)(void *buffer1, u32 len1, void *buffer2, u32 len2, u32 user)<BR>
+  Pointer to a function that will be called by MusyX each time that the buffer 
+  has to be updated. <I>Buffer1</I> and <I>len1</I> define the first area to be 
+  updated, while <I>buffer2</I> and <I>len2</I> define the second area. Two areas 
+  are necessary, since the buffer is a ring buffer, and the area to be updated 
+  may wrap around. <I>Len2</I> will be zero if no second area is needed. <I>User</I> 
+  is a value specified by the application.</P>
+
+<P STYlE="margin-left:100px">u32 user<BR>
+User-defined value to be passed to the update function. For example, it can be used to identify different instances of streams to the update function.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">The function returns a handle to the stream if successful and <CODE>SND_ID_ERROR</CODE> if not.</P>
+
+</BODY>
+</HTML>

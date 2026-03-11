@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<TITLE>SRCMODE_SELECT</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>SRCMODE_SELECT</B></H1><P>
+
+<P STYLE="margin-left:100px">Set SRC mode for this voice.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>SRC</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Coef.</FONT></TD>
+	<TD colspan=6 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x5A</B></TD>
+	<TD width=100><B><I>SRCMODE_SELECT</I></B></TD>
+	<TD width=75><I>type</I></TD>
+	<TD width=75><I>tabindex</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Change the SRC type and parameters to be 
+used for this voice. Influencing the SRC can have a tremendous impact 
+on the frequency spectrum of the resampled output. You may select between 
+three different SRC types: polyphase, linear, and none.</P>
+
+<P STYLE="margin-left:100px">All voices use polyphase resampling and the 
+12.8KHz filter setting by default. This is comparable to the Nintendo 64
+(N64) audio system.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>type</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>SRC type<P>
+	<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=50><FONT color=white>Value</FONT></TD>
+			<TD width=275><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>Polyphase (N64 style). Use <B>tabindex</B> to
+			set the filter.</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>Linear</TD>
+		  </TR>
+		  <TR>
+			<TD>2</TD>
+			<TD>None (i.e., no resampling will take place; 
+			the sample will always play at the system's mixing
+			frequency).</TD>
+		  </TR>
+	</TABLE>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>tabindex</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Sets the filter to be used.<P>
+	<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=50><FONT color=white>Value</FONT></TD>
+			<TD width=275><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>8KHz</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>12.8KHz</TD>
+		  </TR>
+		  <TR>
+			<TD>2</TD>
+			<TD>16KHz</TD>
+		  </TR>
+	</TABLE>
+  </TR>
+</TABLE>
+<P>
+<P>
+</BODY>
+</HTML>

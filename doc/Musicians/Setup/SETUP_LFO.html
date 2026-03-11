@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>SETUP_LFO</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>SETUP_LFO</B></H1><P>
+
+<P STYLE="margin-left:100px">Set up LFO characteristics.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>LFO Nr.</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Period in ms</FONT></TD>
+	<TD colspan=6 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x50</B></TD>
+	<TD width=100><B><I>SETUP_LFO</I></B></TD>
+	<TD width=75><I>num</I></TD>
+	<TD width=100><I>period</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Enables or disables the specified LFO. A 
+<B>period</B> value of 0 will disable the LFO. From that point on, it will 
+continue to produce the last value as a constant. The LFO always starts
+at center level, unless it was already active. <B>Num</B> specifies which
+LFO should be set up. Currently two LFO's (0 and 1) are supported.</P>
+<P STYLE="margin-left:100px">The LFO's always swing through the full
+amplitude. Use the scale parameter when combining them, using the <I>x</I>_SELECT
+macro commands to control the amplitude.</P>
+<P>
+<P STYLE="margin-left:50px">The following table shows how to access 
+the two LFO's in combination with any of the <I>x</I>_SELECT macro commands:</P>
+<P>
+<P STYLE="margin-left:100px"><TABLE border=black cellpadding=3 cellspacing=0>
+  <TR bgcolor=black>
+	<TD width=55><FONT color=white>ExCTRL</FONT></TD>
+	<TD width=75><FONT color=white>Function</FONT></TD>
+  <TR>
+	<TD><B>130</B></TD>
+	<TD><I>LFO1</I></TD>
+  </TR>
+  <TR>
+	<TD><B>131</TD>
+	<TD><I>LFO2</I></TD>
+  </TR>
+</TABLE>
+</P>
+<P>
+<P>
+</BODY>
+</HTML>

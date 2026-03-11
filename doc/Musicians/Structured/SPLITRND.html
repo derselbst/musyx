@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<title>SPLITRND</title>
+</head>
+
+<body>
+
+<h1>SPLITRND</h1>
+
+<p STYLE="margin-left:100px">Splits the macro flow depending on a generated random value.</p>
+
+<p><br>
+</p>
+
+<p STYLE="margin-left:50px"><b>Type: <i>Structure</i></b></p>
+
+<table cellspacing="0" cellpadding="3" border="1" STYLE="margin-left:50px">
+  <tr>
+    <td colspan="2" bgcolor="black"><img src="SinglePix.gif" height="20"></td>
+    <td bgcolor="black" text="white"><font color="white">RNDvalue</font></td>
+    <td bgcolor="black" text="white"><font color="white">SoundMacro ID</font></td>
+    <td bgcolor="black" text="white"><font color="white">SoundMacro step</font></td>
+    <td colspan="5" bgcolor="black"><img src="SinglePix.gif" height="20"></td>
+  </tr>
+  <tr border="3">
+    <td width="50"><b>0x13</b></td>
+    <td width="100"><b><i>SPLITRND</i></b></td>
+    <td width="100"><i>rnd</i></td>
+    <td width="100"><i>macro</i></td>
+    <td width="100"><i>step</i></td>
+    <td width="50" bgcolor="gray"><img src="SinglePix.gif" height="17"></td>
+    <td width="50" bgcolor="gray"><img src="SinglePix.gif" height="17"></td>
+    <td width="50" bgcolor="gray"><img src="SinglePix.gif" height="17"></td>
+    <td width="50" bgcolor="gray"><img src="SinglePix.gif" height="17"></td>
+    <td width="50" bgcolor="gray"><img src="SinglePix.gif" height="17"></td>
+  </tr>
+</table>
+
+<p STYLE="margin-left:50px"><b>Description:</b></p>
+
+<p STYLE="margin-left:100px">This command changes the flow of execution conditionally in
+the current macr. The macro program will jump to the given macrostep inside the specified
+macro, if the generated random value is higher than or equal to the <b>rnd</b> parameter.</p>
+
+<p STYLE="margin-left:50px"><b>Parameters:</b></p>
+
+<table cellspacing="10" cellpadding="3" STYLE="margin-left:100px">
+  <tr>
+    <td width="100">rnd</td>
+    <td width="50">=</td>
+    <td>Each time the command is executed, MusyX will generate a random number between 0 and
+    255. The jump is executed if the value you specify is smaller or equal to the random
+    number genereated. A value of 128 should give and approximately 50/50 chance of the jump
+    being executed. A value of 64 would give 2/3 chance of causing the jump, 1/3 not causing
+    the jump.</td>
+  </tr>
+  <tr>
+    <td>macro</td>
+    <td>=</td>
+    <td>The ID of the new macro to start.</td>
+  </tr>
+  <tr>
+    <td>step</td>
+    <td>=</td>
+    <td>The step inside the new macro to start.</td>
+  </tr>
+</table>
+</body>
+</html>

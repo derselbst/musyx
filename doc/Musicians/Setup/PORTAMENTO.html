@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>PORTAMENTO</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>PORTAMENTO</B></H1><P>
+
+<P STYLE="margin-left:100px">Set portamento mode and time.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>Port. State</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Port. Type</FONT></TD>
+	<TD bgcolor=black><FONT color=white>ms switch</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Ticks/millisec.</FONT></TD>
+	<TD colspan=4 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x1B</B></TD>
+	<TD width=100><B><I>PORTAMENTO</I></B></TD>
+	<TD width=125><I>state</I></TD>
+	<TD width=125><I>type</I></TD>
+	<TD width=100><I>ms flag</I></TD>
+	<TD width=125><I>ticks/ms</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Sets up the mode for a portamento operation. Setting <B>state</B> equal to 0 will disable portamento, while setting <B>state</B> equal to 1 enables it. A value of 2 keeps the <B>state</B> unchanged. By default, portamento is controlled by the MIDI portamento controller (65). The time parameter controls the time needed to reach the current key. By default, this is 500ms. <B>Type</B> defines the type of portamento function. A value of 0 performs portamento only if the last key is still depressed, while a value of 1 performs it all the time. A legato function can be achieved by setting the time parameter to 0.</P>
+
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>mode</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Sets portamento mode.<P>
+		<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=125><FONT color=white>mode value</FONT></TD>
+			<TD width=250><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD><CODE>OFF</CODE></TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD><CODE>ON</CODE></TD>
+		  </TR>
+		  <TR>
+			<TD>2</TD>
+			<TD>MIDI controller (65) controls <CODE>OFF/ON</CODE></TD>
+		  </TR>
+		</TABLE>	
+	</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>type</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Portamento type.<P>
+		<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=125><FONT color=white>Type ID</FONT></TD>
+			<TD width=420><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>enable portamento when old key is held while new key is pressed.</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>portamento always active.</TD>
+		  </TR>
+		</TABLE>	
+	</TD>
+  </TR>
+  <TR>
+	<TD width=100>ms flag</TD>
+	<TD width=50>=</TD>
+	<TD>Switches the <B>ticks/ms</B> parameter from ticks to milliseconds.</TD>
+  </TR>
+  <TR>
+	<TD width=100>ticks/ms</TD>
+	<TD width=50>=</TD>
+	<TD>Specifies portamento time in either ticks or milliseconds.</TD>
+  </TR>
+</TABLE>	
+<P>
+<P>
+
+</BODY>
+</HTML>

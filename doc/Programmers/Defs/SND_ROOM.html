@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>SND_ROOM</TITLE>
+</HEAD>
+
+<BODY>
+<H3>SND_ROOM</H3><P>
+
+<PRE>
+typedef struct SND_ROOM {
+	struct SND_ROOM	*next;
+	struct SND_ROOM	*prev;
+			
+	u32		flags;
+	SND_FVECTOR	pos;		// World "position" of room
+	f32		distance;	// Average distance to listeners (squared)
+				
+	u8		studio;
+				
+	void		(*activateReverb)(u8 studio,void *para);// Callbacks to activate/deactivate "reverb" (AuxA)
+	void		(*deActivateReverb)(u8 studio);		// (NULL -> none)
+	void		*user;					// Pointer to user data (e.g. "reverb" parameters)
+				
+	u32		curMVol;	// Current master mix volume (7.16)
+			} SND_ROOM;
+</PRE>
+
+</BODY>
+</HTML>
+

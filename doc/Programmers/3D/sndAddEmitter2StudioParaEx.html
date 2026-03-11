@@ -1,0 +1,130 @@
+<html>
+
+<head>
+<title>sndAddEmitter2StudioParaEx</title>
+</head>
+
+<body>
+
+<h2>sndAddEmitter2StudioParaEx</h2>
+
+<p STYLE="margin-left:100px"><code>SND_VOICEID sndAddEmitter2StudioPara(SND_EMITTER
+*em_buffer, SND_FVECTOR *pos, SND_FVECTOR *dir, f32 maxDis, f32 comp, u32 flags, SND_FXID
+fxid, u16 groupid, u8 maxVol, u8 minVol, u8 studio, SND_PARAMETER_INFO *para);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function adds an emitter structure to the list of
+emitters.</p>
+
+<p STYLE="margin-left:100px">SND_EMITTER *em<br>
+Pointer to a <a href="../Defs/SND_EMITTER.html" target="view_frame">sturcture</a> defining
+the parameters of the emitter to be added. All values of this structure are initialized by
+the called function. The structure is not copied by the function and must be kept around
+as long as teh emitter is active.</p>
+
+<p STYLE="margin-left:100px">SND_FVECTOR *pos<br>
+Pointer to a <a href="../Defs/SND_FVECTOR.html" target="view_frame">vector</a> containing
+the initial position of the emitter.</p>
+
+<p STYLE="margin-left:100px">SND_FVECTOR *dir<br>
+Pointer to a <a href="../Defs/SND_FVECTOR.html" target="view_frame">vector</a> containing
+the initial movement direction (including the speed) of the emitter.</p>
+
+<p STYLE="margin-left:100px">f32 maxDis<br>
+Maximum distance at which the emitter will still be audible.</p>
+
+<p STYLE="margin-left:100px">f32 comp<br>
+This is a value between -1.0 and 1.0. For values near -1.0, the volume of the emitter will
+remain low while the emitter is far away from the listener, then increase exponentially
+only when the emitter is very close to the listener. For values near 0.0, the volume of
+the emitter will be attenuated linearly with respect to the distance between the emitter
+and the listener. For values near 1.0, the volume of the emitter will be high while the
+emitter is close to the listener, then decrease exponentially only when the emitter is
+very far from the listener.</p>
+
+<p STYLE="margin-left:100px">u32 flags<br>
+The following flags are defined to influence the emitter behavior:</p>
+
+<p STYLE="margin-left:150px"><a href="../Defs/SND_EMITTER_DEFAULT.html"
+target="view_frame">SND_EMITTER_DEFAULT</a><br>
+No special features are activated. This flag is appropriate if the &quot;SND_EMITTER
+*em&quot; parameter is NULL.</p>
+
+<p STYLE="margin-left:150px"><a href="../Defs/SND_EMITTER_CONTINUOUS.html"
+target="view_frame">SND_EMITTER_CONTINUOUS</a><br>
+Updates parameters contiuously. If this is not set, the volume, panning and Doppler values
+will only be calculated at the start of the emitter. The alternate spelling
+SND_EMITTER_CONTINOUS may be used to achieve the same effect.</p>
+
+<p STYLE="margin-left:150px">If the parameter &quot;SND_EMITTER *em&quot; is NOT a NULL
+pointer, then this flag <em><strong>must</strong></em> be asserted.</p>
+
+<p STYLE="margin-left:150px"><a href="../Defs/SND_EMITTER_RESTARTABLE.html"
+target="view_frame">SND_EMITTER_RESTARTABLE</a><br>
+The SFX handled by the emitter may be restarted after being stopped for any reason. For
+example, this can be used to reactivate an engine hum after an explosion has interrupted
+it for a short time.</p>
+
+<p STYLE="margin-left:150px"><a href="../Defs/SND_EMITTER_PAUSABLE.html"
+target="view_frame">SND_EMITTER_PAUSABLE</a><br>
+If the emitter is no longer in the audible range it may be stopped. If this flag is not
+set, the SFX will remain active although its volume is all the way down. This may be
+necessary to run long-duration sound effects.</p>
+
+<p STYLE="margin-left:150px"><a href="../Defs/SND_EMITTER_DOPPLERFX.html"
+target="view_frame">SND_EMITTER_DOPPLERFX</a><br>
+If this flag is set, the emitter will be included into the Doppler effect calculations of
+all listeners that have Doppler calculations enabled.</p>
+
+<p STYLE="margin-left:150px"><a href="../Defs/SND_EMITTER_ITD.html" target="view_frame">SND_EMITTER_ITD</a><br>
+All sound effects, and therfore all emitters, have ITD disabled by default. This flag will
+enable ITD for this emitter. Keep in mind that the macro controlling the sound may
+overwrite this setting.</p>
+
+<p STYLE="margin-left:100px">SND_FXID fxid<br>
+ID of the SFX to be used by the emitter.</p>
+
+<p STYLE="margin-left:100px">u16 groupid<br>
+A value used to group emitters together. Emitters that share the same group are all
+fighting for the available voices on the basis of their volume and time being audible.
+Within a group louder emitters get access to the normal voice allocation system first and
+therefor gain a priority boost. The group ID specified here has nothing to do with the
+groups used to store data. It is simply an integer between 0 and 65535 that is chosen by
+the game application to identify such an emitter group.</p>
+
+<p STYLE="margin-left:100px">u8 minVol<br>
+Volume to be used at maximum audible range.</p>
+
+<p STYLE="margin-left:100px">u8 maxVol<br>
+Volume to be used at the postition of the listener.</p>
+
+<p STYLE="margin-left:100px">u8 studio<br>
+Studio to be used to playback the sound effect controlled by this emitter.</p>
+
+<p STYLE="margin-left:100px">SND_PARAMETER_INFO *para<br>
+<a href="../Defs/SND_PARAMETER_INFO.html" target="view_frame">Structure</a> defining
+additional MIDI controller values to be set each time the emitter is started. The values
+are set after the 3D API's internal ones are set, so that it is possible to overwrite
+these. </p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">Returns a handle to the SFX started by the emitter. 
+  This value may be SND_ID_ERROR without any failure. The start of continuous 
+  emitters may be delayed by an audio frame or two, sometimes. </p>
+<p style="margin-left:100px">Note that if you attempt to start an emitter with 
+  the same sound effect as another emitter within the same group, the new emitter 
+  will not start unless the difference in volume between the two is significant. 
+  For example: if two emitters are started within a group with the same sound 
+  effect and similar volume levels, MusyX will prevent the second one from starting 
+  until the difference between the volume levels of the emitters is beyond some 
+  hardcoded threshold.</p>
+<p style="margin-left:100px">The reason for this behavior is to preserve voice 
+  count. Also, this algorithm mitigates possible wave-cancellation effects caused 
+  by similar sound sources that are in very close proximity.</p>
+<p style="margin-left:100px">Note that a maximum of 32 emitters may be started 
+  in the same audio frame. The number of simultaneous emitters is otherwise limited 
+  only by the number of voices available to MusyX.</p>
+</body>
+</html>

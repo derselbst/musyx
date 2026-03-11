@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>SETPITCHADSR</TITLE>
+</HEAD>
+
+<BODY>
+<H1>SETPITCHADSR</H1>
+
+<P STYLE="margin-left:100px">Activate pitch ADSR</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Pitch</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>DLS-type ADSR</font></TD>
+	<TD bgcolor=black text=white><font color=white>Note range</font></TD>
+	<TD bgcolor=black text=white><font color=white>Cents</font></TD>
+	<TD colspan=5 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x20</B></TD>
+	<TD width=100><B><I>PITCHADSR</I></B></TD>
+	<TD width=100><I>Table ID</I></TD>
+	<TD width=75><I>keys</I></TD>
+	<TD width=75><I>cents</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Sets and activates a pitch ADSR. The maximum pitch change is specified by the <B>keys</B> and <B>cents</B> parameters. Both are signed values to allow for pitch ADSR's ascending and descending. The table referenced by <B>table ID</B> has to be a DLS-type ADSR definition.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>Table ID</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>ID of table containing a DLS type ADSR definition.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>keys</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Signed value indicating the maximum range of the pitch ADSR.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>cents</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Signed value indicating the maximum range of the pitch ADSR.</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>sndUpdateListener</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndUpdateListener</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndUpdateListener(SND_LISTENER *li, SND_FVECTOR *pos, SND_FVECTOR *dir, SND_FVECTOR *heading, SND_FVECTOR *up, u8 vol, SND_ROOM *room);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function updates a listener structure.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_LISTENER *li</BR>
+Pointer to a <A href="../Defs/SND_LISTENER.html" target="view_frame">structure</A> containing the current settings of the listener.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *pos<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the new position of the listener.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *dir<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the new movement direction of the listener.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *heading<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the newnormalized viewing direction of the listener.</P>
+
+<P STYLE="margin-left:100px">SND_FVECTOR *up<BR>
+Pointer to a <A href="../Defs/SND_FVECTOR.html" target="view_frame">vector</A> containing the new normalized up vector of the listener.</P>
+
+<P STYLE="margin-left:100px">u8 vol<BR>
+Overall volume value to be applied to all emitters that are audible to this listener.</P>
+
+<P STYLE="margin-left:100px">SND_ROOM *room<BR>
+Pointer to a <A href="../Defs/SND_ROOM.html" target="view_frame">room description</A>. For now, this pointer must be set to NULL.
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if successful, <CODE>FALSE</CODE> otherwise.</P>
+
+</BODY>
+</HTML>

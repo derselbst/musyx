@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<TITLE>sndFXDoppler</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndFXDoppler</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndFXDoppler(SND_VOICEID vid, u16 doppler);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function sets a new Doppler value for the specified sound effect. The default Doppler value set after start is 0x2000. (0x2000=No pitch offset, lower values pitch down, higer values pitch up). In contrast to the pitch bend, the Doppler effect is applied by scaling the frequency, rather than offsetting the pitch by offsetting the current key.
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_VOICEID vid<BR>
+The voice ID obtained through <A href="sndFXStart.html" target="view_frame">sndFXStart()</A> or <A href="sndFXStartEx.html" target="view_frame">sndFXStartEX()</A>.</P>
+
+<P STYLE="margin-left:100px">u16 doppler<BR>
+The new Doppler value to be applied to the effect.
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if successful, <CODE>FALSE</CODE> otherwise.</P>
+<P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<TITLE>sndSeqGetMidiCtrl14</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSeqGetMidiCtrl14</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>u16 sndSeqGetMidiCtrl14(SND_SEQID seqId, u8 channel, u8 ctrl);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function returns the current value of the specified MIDI controller for the given sequencer instance. To support easy access to "high-res" controllers, this function returns a 14-bit controller value. For standard 7-bit "low-res" controller values, the value is shifted 7 bits to the left (0x40 becomes 0x2000). MusyX extended controller numbers are supported.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_SEQID<BR>
+ID of song/sequencer to affect.</P>
+
+<P STYLE="margin-left:100px">u8 channel<BR>
+MIDI channel for which data is requested.</P>
+
+
+<P STYLE="margin-left:100px">u8 ctrl<BR>
+MIDI controller number (0-127).</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns the current 14-bit controller value.</P>
+<P>
+
+</BODY>
+</HTML>

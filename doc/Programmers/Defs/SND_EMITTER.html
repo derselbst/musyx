@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<TITLE>SND_EMITTER</TITLE>
+</HEAD>
+
+<BODY>
+<H3>SND_EMITTER</H3><P>
+
+<PRE>
+typedef struct SND_EMITTER {
+	struct SND_EMITTER	*next;
+	struct SND_EMITTER	*prev;
+	SND_ROOM		*room;
+	
+	<A href="SND_PARAMETER_INFO.html" target="view_frame">SND_PARAMETER_INFO</A>	*paraInfo;
+	
+	u32			flags;
+	<A href="SND_FVECTOR.html" target="view_frame">SND_FVECTOR</A>		pos;
+	SND_FVECTOR		dir;		// Speed in units/second
+	f32			maxDis;
+	f32			maxVol;
+	f32			minVol;
+	f32			volPush;	// 0.0 = linear -> 1.0 = square
+	SND_VOICEID		vid;
+	u32			group;		// Group ID (by default FXID | 0x80000000) used to do volume priorities for continous emitters
+	
+	SND_FXID		fxid;
+	u8			studio;
+	u16			VolLevelCnt;	// Used during continous emitter allocation process
+	f32			fade;		// Used to fade-in of continous emitters
+				
+			} SND_EMITTER;
+
+</PRE>
+</BODY>
+</HTML>
+

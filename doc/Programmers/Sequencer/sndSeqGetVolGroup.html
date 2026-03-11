@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<TITLE>sndSeqGetVolGroup</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSeqGetVolGroup</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>u8 sndSeqGetVolGroup(SND_SEQID sequid);</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function returns the volume group index that 
+  has been assigned to the given song/sequencer. </P>
+<P STYLE="margin-left:100px">Note that users can assign single tracks within a 
+  given sequencer instance to particular volume groups; these are <i>not</i> returned 
+  by this function. This function only returns the overall volume group index 
+  assigned to the sequencer.</P>
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_SEQUID sequid<BR>
+ID of song/sequencer to be queried.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">The volume group used to control the default song/sequencer volume.</P>
+<P>
+
+</BODY>
+</HTML>

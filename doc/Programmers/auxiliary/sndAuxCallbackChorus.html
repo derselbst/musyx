@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>sndAuxCallbackChorus</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndAuxCallbackChorus</H2><P>
+
+
+<P STYLE="margin-left:100px"><CODE>void sndAuxCallbackChorus(u8 reason, 
+SND_AUX_INFO *info, void *user);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This callback function is to be used together
+with <A href="sndSetAuxProcessingCallbacks.html" target="view_frame">
+sndSetAuxProcessingCallbacks()</A>. It implements a chorus effect.</P>
+
+<H3>Input:</H3>
+<P STYLE="margin-left:100px">u8 reason<BR>
+Specifies the reason why the callback was invoked. The following codes 
+are defined:</P>
+
+<P STYLE="margin-left:150px">SND_AUX_REASON_BUFFERUPDATE<BR>
+Buffers are ready for processing. Buffer pointers are specified in the 
+info structure.</P>
+
+<P STYLE="margin-left:150px">SND_AUX_REASON_PARAMETERUPDATE<BR>
+MIDI parameters have been changed. Parameters are stored in the info 
+structure.</P>
+
+<P STYLE="margin-left:100px">SND_AUX_INFO *info<BR>
+Pointer to an <A href="../Defs/SND_AUX_INFO.html" target="view_frame">info structure</A>
+containing data needed to properly react 
+to the reason code passed by the caller. Depending on the code either 
+the fields in the SND_AUX_BUFFERUPDATE structure or in the 
+SND_AUX_PARAMETERUPDATE are valid. </P>
+
+<P STYLE="margin-left:100px">void *user<BR>
+This pointer must point to a structure of type <A 
+href="../Defs/SND_AUX_CHORUS.html" 
+target="view_frame">SND_AUX_CHORUS</A> prepared by <A 
+href="sndAuxCallbackPrepareChorus.html" 
+target="view_frame">sndAuxCallbackPrepareChorus()</A>.
+
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>

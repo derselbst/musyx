@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>TRAP_EVENT</TITLE>
+</HEAD>
+
+<BODY>
+<H1>TRAP_EVENT</H1>
+
+<P STYLE="margin-left:100px">Registers a jump destination in a macro.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Structure</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Event</font></TD>
+	<TD bgcolor=black text=white><font color=white>SoundMacro ID</font></TD>
+	<TD bgcolor=black text=white><font color=white>SoundMacro step</font></TD>
+	<TD colspan=5 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x28</B></TD>
+	<TD width=100><B><I>TRAP_EVENT</I></B></TD>
+	<TD width=100><I>Event ID</I></TD>
+	<TD width=100><I>macro</I></TD>
+	<TD width=100><I>step</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Registers a jump destination in a macro if the specified event occurs</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>Event ID</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>The Event ID triggers the trap<P>
+		<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=125><FONT color=white>Event ID</FONT></TD>
+			<TD width=200><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>Keyoff received by macro.</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>Sample ended.</TD>
+		  </TR>
+		  <TR>
+			<TD>2</TD>
+			<TD>Message received by macro.</TD>
+		  </TR>
+		</TABLE>		
+	</TD>
+  </TR>
+  <TR>
+	<TD>macro</TD>
+	<TD>=</TD>
+	<TD>The ID of the new macro to start.</TD>
+  </TR>
+  <TR>
+	<TD>step</TD>
+	<TD>=</TD>
+	<TD>The step inside the new macro to start.</TD>
+  </TR>
+</TABLE>
+<P>
+
+<P STYLE="margin-left:50px">See Also:</P>
+<P STYLE="margin-left:100px"><A href="UNTRAP_EVENT.html">UNTRAP_EVENT</A></P>
+<P>
+<P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<TITLE>sndSeqCrossfade</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSeqCrossfade</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>void sndSeqCrossfade(SND_CROSS_FADE *ci, SND_SEQID *new_seq_id);</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function initiates a cross fade between two pieces of music.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_CROSSFADE *ci<BR>
+Pointer to a <A href="../Defs/SND_CROSSFADE.html" target="view_frame">structure</A> containing all necessary information to perform the cross fade.<BR>
+
+<P STYLE="margin-left:100px">SND_SEQID *new_seq_id<BR>
+Pointer to a ULONG that will be assigned the new sequencer ID as soon as it is available. A temporary ID will be assigned immediately, while the real ID will be assigned at some point during the cross fade. This variable must be present during the cross fade for that reason. The temporary ID can be used for most control purposes, as long as no real ID is generated.
+
+
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>

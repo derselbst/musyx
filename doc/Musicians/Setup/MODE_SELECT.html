@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>MODE_SELECT</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>MODE_SELECT</B></H1><P>
+
+<P STYLE="margin-left:100px">Set global system modes.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>DLS Vol.</FONT></TD>
+	<TD bgcolor=black><FONT color=white>ITD</FONT></TD>
+	<TD colspan=6 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x58</B></TD>
+	<TD width=100><B><I>MODE_SELECT</I></B></TD>
+	<TD width=75><I>DLS</I></TD>
+	<TD width=75><I>ITD</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Enables or disables global states for the 
+current voice. The <B>DLS</B> flag determines whether the MusyX volume
+curve (0) or the original DLS curve (1) should be used. The <B>ITD</B>
+flag determines whether ITD (initial time delay) is enabled (1) or 
+disabled (0) for this voice.</P>
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>DLS</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Dteremines volume curve to use (0=MusyX, 1=DLS).</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>ITD</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Determines ITD state (0=<CODE>OFF</CODE>, 1=<CODE>ON</CODE>).</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+</BODY>
+</HTML>

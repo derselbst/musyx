@@ -1,0 +1,100 @@
+<html>
+
+<head>
+<title>sndStreamAllocStereo</title>
+</head>
+
+<body>
+
+<h2>sndStreamAllocStereo</h2>
+
+<p STYLE="margin-left:100px"><code>SND_STREAMID sndStreamAllocStereo(u8 prio, void
+*lBuffer, void *rBuffer, u32 samples, u32 frq, u8 vol, u8 pan, u8 span, u8 auxa, u8 auxb,
+u8 studio, u32 flags, u32 (*updateFunction)(void *buffer1, u32 len1, void *buffer2, u32
+len2, u32 user), u32 lUser, u32 rUser, SND_ADPCMSTREAM_INFO *adpcmInfoL,
+SND_ADPCMSTREAM_INFO *adpcmInfoR);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function allocates a stereo stream buffer pair 
+  in ARAM. By default the function will immediately activate the buffers for streaming 
+  by allocating two voices. The update function will be called in approximately 
+  20ms intervals.</p>
+<p STYLE="margin-left:100px">Note that stereo streams do not currently support 
+  manual ARAM updates. Furthermore, the ADPCM parameters for stereo streams cannot 
+  currently be updated after allocation. </p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px">u8 prio Priority to be used for allocating the voice to be
+used for playing the stream. To guarantee allocation, the priority should be chosen as
+high as possible (255).</p>
+
+<p STYLE="margin-left:100px">void *lBuffer, *rBuffer<br>
+  Pointers to the left-channel and right-channel MRAM buffers allocated by the 
+  application. The neccesary size can be retrieved by calling <a href="sndStreamAllocLength.html" target="view_frame">sndStreamAllocLength()</a>.</p>
+
+<p STYlE="margin-left:100px">u32 samples<br>
+Length of the ring buffer in samples.</p>
+
+<p STYlE="margin-left:100px">u32 frq<br>
+Stream frequency in Hz.</p>
+
+<p STYlE="margin-left:100px">u8 vol<br>
+Volume used for playback (0-127).</p>
+
+<p STYlE="margin-left:100px">u8 pan<br>
+Stereo panning used for playback (0-127).</p>
+
+<p STYlE="margin-left:100px">u8 span<br>
+Surround panning used for playback (0-127).</p>
+
+<p STYLE="margin-left:100px">u8 auxa<br>
+AuxA volume.</p>
+
+<p STYLE="margin-left:100px">u8 auxb<br>
+  AuxB volume.</p>
+
+<p STYLE="margin-left:100px">u8 studio<br>
+  Studio in which the stream should be played. User 'zero' for default.</p>
+
+<p STYLE="margin-left:100px">u32 flags<br>
+Any combination (unless noted otherwise) of the following flags are allowed:</p>
+
+<p STYLE="margin-left:150px">SND_STREAM_DEFAULT<br>
+Allocate and activate PCM16 stream.</p>
+
+<p STYLE="margin-left:150px">SND_STREAM_ADPCM<br>
+The stream is in ADPCM format.</p>
+
+<p STYLE="margin-left:150px">SND_STREAM_INACTIVE<br>
+  A buffer in ARAM will be allocated, but no voice will be allocated yet. A subsequent 
+  call to <a href="sndStreamActivate.html" target="view_frame">sndStreamActivate()</a> 
+  can be used to activate playback. This flag is useful for allocating a stream 
+  buffer in ARAM, then reusing it throughout the lifetime of an application. Such 
+  a strategy mitigates the possibility of fragmenting ARAM by continually allocating 
+  and freeing software streams during runtime.</p>
+
+<p STYlE="margin-left:100px">u8 (*update_function)(void *buffer1, u32 len1, void *buffer2,
+u32 len2, u32 user)<br>
+Pointer to a function that will be called by MusyX each time that the buffer has to be
+updated. <i>Buffer1</i> and <i>len1</i> define the first area to be updated, while <i>buffer2</i>
+and <i>len2</i> define the second area. Two areas are necessary, since the buffer is used
+as a ring buffer, and the area to be updated may wrap around. <i>Len2</i> will be zero if
+no second area is needed. <i>User</i> is a value specified by the application.</p>
+
+<p STYlE="margin-left:100px">u32 lUser, rUser<br>
+  User-defined values to be passed to the update function for left-channel and 
+  right-channel updates.</p>
+
+<p STYLE="margin-left:100px">adpcmInfoL, adpcmInfoR<br>
+  Pointers to structures containing the ADPCM coefficients needed to play the 
+  left-channel and right-channel ADPCM streams. If the streams arePCM16 format 
+  or not immediately activated, these pointers may be NULL.</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">The function returns a handle to the stream if successful and
+<code>SND_ID_ERROR</code> if not.</p>
+</body>
+</html>

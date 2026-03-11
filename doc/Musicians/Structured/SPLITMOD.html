@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>SPLITMOD</TITLE>
+</HEAD>
+
+<BODY>
+<H1>SPLITMOD</H1>
+
+<P STYLE="margin-left:100px">Splits the macro flow depending on modwheel.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Structure</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Mod value</font></TD>
+	<TD bgcolor=black text=white><font color=white>SoundMacro ID</font></TD>
+	<TD bgcolor=black text=white><font color=white>SoundMacro step</font></TD>
+	<TD colspan=5 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x0A</B></TD>
+	<TD width=100><B><I>SPLITMOD</I></B></TD>
+	<TD width=100><I>Mod.</I></TD>
+	<TD width=100><I>macro</I></TD>
+	<TD width=100><I>step</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">This command changes the flow of execution conditionally in the current macro. The macro program will jump to the given macrostep inside the specified macro, if the current modulation value is higher than or equal to the <B>mod.</B> parameter</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100>mod.</TD>
+	<TD width=50>=</TD>
+	<TD>This defines the point where the split occurs (0-127).</TD>
+  </TR>
+  <TR>
+	<TD>macro</TD>
+	<TD>=</TD>
+	<TD>The ID of the new macro to start.</TD>
+  </TR>
+  <TR>
+	<TD>step</TD>
+	<TD>=</TD>
+	<TD>The step inside the new macro to start.</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,80 @@
+<html>
+
+<head>
+<title>sndInit</title>
+</head>
+
+<body>
+
+<h2>sndInit</h2>
+
+<p STYLE="margin-left:100px"><code>s32 sndInit (u8 voices, u8 music, u8 sfx, u8 
+  studios, u32 flags, u32 aramsize);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function initializes the sound system. It must be called
+once before any other routines of the system are used.</p>
+
+<p STYLE="margin-left:100px">Note that the master volume (for both music and sound 
+  effects) will be zero after initialization is complete. The application must 
+  set the master volume level before sound will be audible. See <a href="../Volume/sndVolume.html" target="view_frame">sndVolume()</a>.
+</p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px">u8 voices<br>
+Specifies the maximum number of voices to be mixed at a time. The mazimum number of voices
+allowed on Dolphin is 64.</p>
+
+<p STYLE="margin-left:100px">u8 music<br>
+  Specifies the maximum number of voices that can be used by the synthesizer to 
+  playback instruments.</p>
+<p STYLE="margin-left:100px">u8 sfx <br>
+  Specifies the maximum number of voices that can be used by the synthesizer to 
+  playback sound effects.</p>
+
+<p STYLE="margin-left:100px">u8 studios<br>
+  Specifies the maximum number of studios that the application will use. MusyX 
+  will allocate approximately 15KB of main memory for each studio. MusyX supports 
+  a minimum of one studio and maximum of 8. A studio is a 'mixing context'. A 
+  set of voices may be mixed into a studio; the studio may then be added to other 
+  studios, or be passed through an Aux effect bus. Thus, studios are useful for 
+  modulating an arbitrary subset of voices. Note that most applications will only 
+  require one studio. Using multiple studios is an advanced technique that is 
+  relatively costly in terms of DSP processing cycles and memory usage. </p>
+<p style="margin-left:100px"></p>
+<p STYLE="margin-left:100px">u32 flags<br>
+  These flags are used to trigger specific behaviors of the sound system. Most 
+  flags are platform specific and can be found in the Musician's Reference. A 
+  few, however, are platform independent.</p>
+
+<p STYLE="margin-left:150px"><a href="../Defs/SND_FLAGS_DEFAULT.html" target="view_frame">SND_FLAGS_DEFAULT</a><br>
+  Default settings are used.</p>
+<p style="margin-left:100px"></p>
+<p STYLE="margin-left:150px"><a href="../Defs/SND_FLAGS_EMITTER__.html" target="view_frame">SND_FLAGS_EMITTERGROUPSUSEMAXVOICES</a><br>
+  This flag modifies the starting criteria for 3D emitters. Please see the &quot;non-EX&quot; 
+  <font face="Courier New, Courier, mono">sndAddEmitter</font> functions for more 
+  details.</p>
+
+<p STYLE="margin-left:100px">u32 aramSize<br>
+  This specifies the maximum amount of ARAM that MusyX will use. Note that this 
+  is a contiguous block of memory, and always starts at the bottom of user-ARAM 
+  space (as indicated by the <font face="Courier New, Courier, mono">ARGetBaseAddress()</font> 
+  function).</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">The function returns a value of 0, if successful.</p>
+
+<h3>See also:</h3>
+
+<p STYLE="margin-left:100px"><a href="../Volume/sndVolume.html" target="view_frame">sndVolume()</a></p>
+
+<blockquote>
+  <blockquote>
+    <p><a href="sndReinit.html"></a>&nbsp;</p>
+  </blockquote>
+</blockquote>
+</body>
+</html>

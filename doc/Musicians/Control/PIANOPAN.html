@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>PIANOPAN</TITLE>
+</HEAD>
+
+<BODY>
+<H1>PIANOPAN</H1>
+
+<P STYLE="margin-left:100px">Piano stereo panning</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Pitch</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Scale</font></TD>
+	<TD bgcolor=black text=white><font color=white>Centerkey</font></TD>
+	<TD bgcolor=black text=white><font color=white>Centerpan</font></TD>
+	<TD colspan=5 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x0B</B></TD>
+	<TD width=100><B><I>PIANOPAN</I></B></TD>
+	<TD width=100><I>scale</I></TD>
+	<TD width=100><I>cen.key</I></TD>
+	<TD width=100><I>cen.pan</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">This macro command is especially designed to give instruments like a piano a naturalistic stereo behavior. The current key is used to calculate a pannning position. First, the key is converted to an offset by subtracting the <B>cen.key</B>. Next, the scale is applied. A scale of 127 will give you the full range, while a scale of 0 will eliminate any offset. Finally, the <B>cen.pan</B> is added. This last value can be viewed as teh position of the instrument in the room. Since the final values may exceed the normal panning range, illegal values are clipped. A negative scale will invert the stereo panorama.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>scale</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Scales the range of the panning.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>cen.key</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Defines the middle key of the panning.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>cen.pan</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Offset of the panning range (the center of the piano).</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

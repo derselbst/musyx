@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<TITLE>sndAuxCallbackReverb</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndAuxCallbackReverb</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>void sndAuxCallbackReverb(s32 *left, s32 *right, s32 *surround, void *user);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This callback function is used with <A href="sndSetAuxProcessingCallbacks.html" target="view_frame">sndSetAuxProcessingCallbacks</A>. It implements a reverb algorithm.</P>
+
+<H3>Input:</H3>
+<P STYLE="margin-left:100px">s32 *left<BR>
+Pointer to a buffer containing 5ms of 32-bit signed PCM audio data for the left channel. The buffer functions as both input and output buffer for the algorithm.</P>
+
+<P STYLE="margin-left:100px">s32 *right<BR>
+Pointer to a buffer containing 5ms of 32-bit signed PCM adio data for the right channel. The buffer functions as both input and output buffer for the algorithm.</P>
+
+<P STYLE="margin-left:100px">s32 *surround<BR>
+Pointer to a buffer containing 5ms of 32-bit signed PCM adio data for the surround channel. The buffer functions as both input and output buffer for the algorithm.</P>
+
+<P STYLE="margin-left:100px">void *user<BR>
+This pointer must point to a structure of type SND_AUX_REVERB prepared by <A href="sndAuxCallbackPrepareReverb.html" target="view_frame">sndAuxCallbackPrepareReverb</A>.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>

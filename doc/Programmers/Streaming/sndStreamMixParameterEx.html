@@ -1,0 +1,44 @@
+<html>
+
+<head>
+<title>sndStreamMixParameterEx</title>
+</head>
+
+<body>
+
+<h2>sndStreamMixParameterEx</h2>
+
+<p STYLE="margin-left:100px"><code>void sndStreamMixParameterEx(SND_STREAMID stid, u8 vol,
+u8 pan, u8 span, u8 auxa, u8 auxb);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function changes stream playback parameters during
+playback.</p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px">u32 stid<br>
+  Handle of stream to be manipulated. If the handle points to a stereo pair, then 
+  both streams will be automatically updated.</p>
+
+<p STYLE="margin-left:100px">u8 vol<br>
+New volume to be set.</p>
+
+<p STYLE="margin-left:100px">u8 pan<br>
+New panning to be set.</p>
+
+<p STYLE="margin-left:100px">u8 span<br>
+New surround panning to be set.</p>
+
+<p STYLE="margin-left:100px">u8 auxa<br>
+New AuxA volume to be set (reverb).</p>
+
+<p STYLE="margin-left:100px">u8 auxb<br>
+New AuxB volume to be set (chorus).</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">None.</p>
+</body>
+</html>

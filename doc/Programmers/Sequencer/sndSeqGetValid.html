@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<TITLE>sndSeqGetValid</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSeqGetValid</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndSeqGetValid(SND_SEQID sequid);</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function is used to determine if the song is actually playing or still in a temporary state. Songs may be in a temporary state immediatley after or during cross fades.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_SEQID<BR>
+ID of the song/sequencer.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if the sequencer is playing the song specified by the ID. <CODE>FALSE</CODE> is returned if the ID is temporary.</P>
+<P>
+
+</BODY>
+</HTML>

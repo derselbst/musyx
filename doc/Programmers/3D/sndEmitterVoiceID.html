@@ -1,0 +1,22 @@
+<HTML>
+<HEAD>
+<TITLE>sndEmitterVoiceID</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndEmitterVoiceID</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>SND_VOICEID sndEmitterVoiceID(SND_EMITTER *em);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function gets the current voice ID of the SFX handled by the emitter specified.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_EMITTER *em<BR>
+Pointer to a <A href="../Defs/SND_EMITTER.html" target="view_frame">sturcture</A> containing the current settings of the emitter.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">If the SFX is active, the function will return its handle. If not, SND_ID_ERROR will be returned. Even the latter value may be passed to all SFX functions without any negative side effects.</P>
+
+</BODY>
+</HTML>

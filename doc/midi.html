@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<TITLE>MIDI Input-Network</TITLE>
+</HEAD>
+
+<BODY>
+<H2>MIDI Input-Network</H2><P><P>
+
+This user-defined network of connections allows the routing of data between MIDI controllers and the controlling inputs for these values on the synthesizer side.  Basically, you can grab a number of MIDI controllers and combine them in multiple ways, then route the result (to the “modulation” input, for example). This can be a useful aid in controlling sound effects in the game application.  However, the MIDI input network is by no means limited to this area.  Note that the more complex the setup, the more time is needed for calculating each controller change. The default settings reflect the basic GM settings known to musicians. These settings are always modified locally on a per-macro basis, which allows for even more flexibility.<P><P>
+
+<LIST>
+<LI> Up to four MIDI controllers and/or variables may be combined per input.<P>
+<LI>Each MIDI controller / variable may be scaled before it takes part in the defined combine operation.<P>
+<LI>Combine operations are executed in the order in which they are defined.<P>
+<LI>Four combine modes are possible: Set, Add, Sub and Multiply.<P>
+<LI>The Set combination mode resets the complete setup and therefore always writes to the first slot in this little queue.<P>
+<LI>"Hires" 14-bit controllers are called (and handled as) signed; e.g., [-0x2000..0x1FFF] => [-1.0..1.0] for multiplication.<P>
+<LI>"Lores" 7-bit controllers are transformed into 14-bit representation (i.e., shifted left  by 7 bits) before any operation occurs; e.g., [0x0000..0x3F80] => [0..2.0] for multiplication.<P>
+<LI>Signed * Signed => Signed.<P>
+<LI>Unsigned * Signed => Signed.<P>
+<LI>Signed  Unsigned => Signed.<P>
+<LI>Unsigned * Unsigned => Unsigned.<P>
+<LI>Signed +/- Signed => Signed.<P>
+<LI>Signed +/- Unsigned => Signed.<P>
+<LI>Unsigned +/- Signed => Unsigned.<P>
+<LI>Unsigned +/- Unsigned => Unsigned.<P>
+<LI>Variables combine as signed 14-bit values. (Note: There is no conversion from the 0x2000-centered representation to a signed representation before any operation. The value is taken "as is" in it’s "original" signed form.<P>
+<LI>After each combine step the value is clamped to 14 bits.<P>
+<LI>LFO1 and LFO2 are available as extended MIDI controllers and are viewed as signed 14-bit controllers. They always oscillate between 0 and 0x3FFF [-1.0 .. 1.0].<P>
+<LI>The original key and velocity with which the macro starts is also available. Note: These values are converted to 14-bit notation; e.g., a key of 0x30 will be represented as 0x0180.<P>
+<LI>The time (in milliseconds) since the macro began is also available. It’s simply copied and clamped at 0x3FFF (= ca. 16ms).<P>
+<LI>Panning and Surround Panning are viewed as signed controllers since they are centered around 0x40 (or 0x2000 in 14-bit representation).<P>
+<LI>The extended MIDI controller "Doppler" is also 0x2000-centered and signed.<P>
+</LIST>
+
+</BODY>
+</HTML>

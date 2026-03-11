@@ -1,0 +1,148 @@
+<HTML>
+<HEAD>
+<TITLE>VOL_SELECT</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>VOL_SELECT</B></H1><P>
+
+<P STYLE="margin-left:100px">Add a volume calculation component.</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Setup</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>MIDI Contr.</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Scale Percentage</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Combine uCode</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Var. Input</FONT></TD>
+	<TD bgcolor=black><FONT color=white>Fine Scale</FONT></TD>
+	<TD colspan=3 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x33</B></TD>
+	<TD width=100><B><I>VOL_SELECT</I></B></TD>
+	<TD width=100><I>ctrl</I></TD>
+	<TD width=125><I>scale</I></TD>
+	<TD width=125><I>comb</I></TD>
+	<TD width=100><I>var</I></TD>
+	<TD width=100><I>fine</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Selects an additional component for the volume
+calculation. The first use of this command resets the default values
+to empty and adds the new component. All further calls add additional 
+components. <B>Comb</B>=0 sets the value, <B>comb</B>=1 adds the value,
+and <B>comb</B>=2 multiplies the old and the new values.</P>
+
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>ctrl</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>The MIDI controller number/Variable index. (see table below)</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>scale</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>A signed scaling factor (-10000 to 10000) in percent.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>comb</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD><P>
+		<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=125><FONT color=white>mode value</FONT></TD>
+			<TD width=250><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD>set value from defined controller.</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD>add value to current controller assignment.</TD>
+		  </TR>
+		  <TR>
+			<TD>2</TD>
+			<TD>multiply the old and new controllers.</TD>
+		  </TR>
+		</TABLE>	
+	</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>var</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD><P>
+		<TABLE border=black cellpadding=0 cellspacing=0>
+		  <TR bgcolor=black>
+			<TD width=125><FONT color=white>mode value</FONT></TD>
+			<TD width=250><FONT color=white>Description</FONT></TD>
+		  <TR>
+			<TD>0</TD>
+			<TD><I>ctrl</I> specifies a MIDI controller number.</TD>
+		  </TR>
+		  <TR>
+			<TD>1</TD>
+			<TD><I>ctrl</I> specifies a variable.</TD>
+		  </TR>
+		</TABLE>	
+	</TD>
+  </TR>
+</TABLE>	
+<P>
+<P>
+<P STYLE="margin-left:100px">You may use all standard MIDI controller 
+numbers, as well as the following defined extensions:</P>
+
+<P STYLE="margin-left:100px" id=table><TABLE border=black cellpadding=3 cellspacing=0>
+  <TR bgcolor=black>
+	<TD width=55><FONT color=white>ExCTRL</FONT></TD>
+	<TD width=400><FONT color=white>Function</FONT></TD>
+  <TR>
+	<TD><B>128</B></TD>
+	<TD><I>Pitchbend (since there is no controller in the MIDI standard)</I></TD>
+  </TR>
+  <TR>
+	<TD><B>129</TD>
+	<TD><I>Aftertouch (since there is no controller in the MIDI standard)</I></TD>
+  </TR>
+  <TR>
+	<TD><B>130</B></TD>
+	<TD><I>LFO1 (see <A href="SETUP_LFO.html"><B>SETUP_LFO</A></B> macro command.)</I></TD>
+  </TR>
+  <TR>
+	<TD><B>131</B></TD>
+	<TD><I>LFO2  (see <A href="SETUP_LFO.html"><B>SETUP_LFO</B></A> macro command.)</I></TD>
+  </TR>
+  <TR>
+	<TD><B>132</B></TD>
+	<TD><I>Surround Panning (0=front, 127=surround)</I></TD>
+  </TR>
+  <TR>
+	<TD><B>133</B></TD>
+	<TD><I>Key used to start macro</I></TD>
+  </TR>
+  <TR>
+	<TD><B>134</B></TD>
+	<TD><I>Velocity used to start macro</I></TD>
+  </TR>
+  <TR>
+	<TD><B>135</B></TD>
+	<TD><I>Time [ms] since macro start (only 14-bit!)<I></TD>
+  <TR>
+</TABLE></P>
+<P>
+<P>
+
+</BODY>
+</HTML>

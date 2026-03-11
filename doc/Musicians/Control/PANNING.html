@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>PANNING</TITLE>
+</HEAD>
+
+<BODY>
+<H1>PANNING</H1>
+
+<P STYLE="margin-left:100px">Sets the panning to be used with the macro.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Control</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Pan Position</font></TD>
+	<TD bgcolor=black text=white><font color=white>Time ms</font></TD>
+	<TD bgcolor=black text=white><font color=white>Width</font></TD>
+	<TD colspan=5 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x0E</B></TD>
+	<TD width=100><B><I>PANNING</I></B></TD>
+	<TD width=100><I>pan.pos</I></TD>
+	<TD width=100><I>time</I></TD>
+	<TD width=75><I>width</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Sets the panning to be used with the macro. If no panning is specified, the default center panning will be used. The <B>pan.pos</B> parameter specifies the position (0=Left, 64=Center, 127=Right). The <B>time</B> and <B>width</B> parameters enable an automated pan-sweep. The panning will move from the specified location to the new one specified by the signed offset added to <B>pan.pos</B> within <B>time</B> milliseconds. If these parameters are zero, only the new panning position will be set.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>pan.pos</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Like MIDI-panning (0-127), where 0 is totally left, 64 is center and 127 is totally 	right.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>time</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Auto-panning slide time.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>width</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>Offset to the pan position to which the auto-panning slides.</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

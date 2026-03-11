@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<TITLE>SND_PLAYPARA</TITLE>
+</HEAD>
+
+<BODY>
+<H3>SND_PLAYPARA</H3><P>
+<PRE>
+typedef struct SND_PLAYPARA {
+	u32		flags;		// Enable features by using these flags
+	u32		trackMute[2];	// Initial mute settings
+	u16		speed;		// Initial speed factor (0x100 = 1:1)
+	struct {			// Start volume information
+		u16	time;
+		u8	target;
+		} volume;
+	u8		numSeqVolDef;	// Number of non-standart volume group tracks
+	SND_SEQVOLDEF	*seqVolDef;	// List of tracks and the volume groups to be assigned to them
+	u8		numFaded;	// Number of entries to the fade list
+	u8		*faded;		// Array of u8s containing the volume group IDs that should be affected by the initial volume setting (default will always be affected)
+	} SND_PLAYPARA;
+</PRE>
+
+<P STYLE="margin-left:100px">The <I>flags</I> field defines which subset of parameters is active at any given time. The following values are defined:</P>
+
+<P STYLE="margin-left:150px"><A href="../Defs/ParaDef.html" target="view_frame">SND_PLAYPARA_DEFAULT</A><BR>
+No parameters are valid.</P>
+
+<P STYLE="margin-left:150px"><A href="../Defs/ParaDef.html" target="view_frame">SND_PLAYPARA_TRACKMUTE</A><BR>
+The <I>trackmute</I> fields are ative. Each cleared bit in these two ULONGs defines a track to be muted.</P>
+
+<P STYLE="margin-left:150px"><A href="../Defs/ParaDef.html" target="view_frame">SND_PLAYPARA_SPEED</A><BR>
+The <I>speed</I> field is active. A value of 0x100 selects normal speed. Lower values slow the song down. Higher levels speed it up.</P>
+
+<P STYLE="margin-left:150px"><A href="../Defs/ParaDef.html" target="view_frame">SND_PLAYPARA_VOLUME</A><BR>
+This flag turns on the basic volume control. The <I>time</I> and <I>target</I> values become active. <I>Target</I> specifies the volume level at the end of the fade, while <I>time</I> specifies the time in milliseconds that fade should take. A value of  zero will set the new volume immediatley.</P>
+
+<P STYLE="margin-left:150px"><A href="../Defs/ParaDef.html" target="view_frame">SND_PLAYPARA_SEQVOLDEF</A><BR>
+Each track in an arrangement may be controlled by its very own volume group. This flag enables you to control this feature in detail. If the flag is set, the following fields must be initialized:</P>
+
+<P STYLE="margin-left:200px"><I>num_seqvoldef</I> has to be initialized with the number of tracks to which the non-default settings should be applied. The seqvoldef field is a pointer to an array of SND_SEQVOLDEF <A href="../Defs/SND_SEQVOLDEF.html" target="view_frame">structures</A> that define all parameters for the specific tracks.</P>
+
+<P STYLE="margin-left:200px"><i>num_faded</I> contains the number of tracks that should be faded. One may enable or disable fading for each track, to enable the programmer to fade in and out separate tracks without having to setup all volume groups manually. The <I>faded</I> field contains a pointer to a list of track numbers.<P>
+
+
+<P STYLE="margin-left:150px"><A href="../Defs/ParaDef.html" target="view_frame">SND_PLAYPARA_PAUSE</A><BR>
+The song will be "started" in pause mode. No audio from the song will be heard until you restart it.</P>
+
+</BODY>
+</HTML>

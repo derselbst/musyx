@@ -1,0 +1,26 @@
+<html>
+
+<head>
+<title>Effects System</title>
+</head>
+
+<body>
+
+<h2 align="center">Effects System</h2>
+
+<hr>
+
+<p>MusyX has been designed to be very flexible in the way effects are applied to the
+generated audio signal. Each studio has two auxiliary busses, called AUX A and AUX B,
+which are each 3 channels wide (left, right, and surround). </p>
+
+<p>Each of the auxiliary busses can have a completely independent type of effect attached
+to it. You can even put a user-defined effect engine into each of the busses by providing
+the code for the engine by registering a callback. A couple of the most common effects are
+provided as part of the system, including reverb, delay, and chorus.</p>
+
+<p>Due to the signal path, all signals passed through the auxiliary busses are delayed by
+10ms, even if no effect is active. The PC based emulation offers a plug-in interface. This
+makes the user-defined effects algorithms available during development time.</p>
+</body>
+</html>

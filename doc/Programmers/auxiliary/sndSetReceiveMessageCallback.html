@@ -1,0 +1,23 @@
+<HTML>
+<HEAD>
+<TITLE>sndSetReceiveMessageCallback</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSetReceiveMessageCallback</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>void sndSetReceiveMessageCallback(void (*func) (SND_VOICEID vid, s32 mesg));</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">Macros controlling sounds may send messages (simple signed 32-bit numbers) to the application to communicate state, etc. In order to receive these messages, the application has to register a callback using this function. The callback will be executed each time a message is sent to the application. The message code is passed as a parameter.</P>
+
+<H3>Input:</H3>
+<P STYLE="margin-left:100px">void(*func)(SND_VOICEID vid, s32 mesg)<BR>
+Pointer to a function to be called when a message is sent to the applecation. <I>Vid</I> contains the ID of the voice sending the message <I>mesg</I>.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,21 @@
+<HTML>
+<HEAD>
+<TITLE>_SND_PLAYBACKINFO</TITLE>
+</HEAD>
+
+<BODY>
+<H3>_SND_PLAYBACKINFO</H3><P>
+
+<PRE>
+<CODE>typedef struct _snd_playbackinfo{
+	u32	frq		 //frequency used to output audio
+	u8	stereo		 //TRUE if output is stereo
+	u8	bits		 //Number of bits per sample
+	char	devname[256];	 //ASCII name of device
+	char	version_text[356]//ASCII driver name and version
+} SND_PLAYBACKINFO;
+</PRE>
+</P>
+
+</BODY>
+</HTML>

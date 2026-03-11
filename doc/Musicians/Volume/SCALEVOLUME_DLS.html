@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>SCALEVOLUME_DLS</TITLE>
+</HEAD>
+
+<BODY>
+<H1>SCALEVOLUME_DLS</H1>
+
+<P STYLE="margin-left:100px">Scale current volume of voice suitable for DLS operation.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Volume</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Scale</font></TD>
+	<TD bgcolor=black text=white><font color=white>Org Vol.</font></TD>
+	<TD colspan=7 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x21</B></TD>
+	<TD width=100><B><I>SCALEVOL_DLS</I></B></TD>
+	<TD width=75><I>Scale</I></TD>
+	<TD width=100><I>org. vel</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Calculates a new volume for the current voice by scaling the velocity. A scale of 4096 equals 100%. The new volume is calculated either using the current velocity (<B>org.vel</B>=0) or the original velocity (<B>org.vel</B>=1).</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>scale</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>The scaling factor of the velocity.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>org.vel</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>If this switch is set to <CODE>ON</CODE>, the orignal velocity (the one from when the
+	macro was started) is used instead of the current velocity/volume.<P></TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

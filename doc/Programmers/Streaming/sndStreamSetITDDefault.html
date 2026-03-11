@@ -1,0 +1,36 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>sndStreamSetITDDefault</title>
+</head>
+
+<body>
+
+<h2>sndStreamSetITDDefault</h2>
+
+<p STYLE="margin-left:100px"><code>void sndSetITDDefault(u8 studio, bool musicITD, bool
+sfxITD);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function sets the default ITD state of sound effects and
+music voices for the specified studio. A studio by default has both these values set to <code>FALSE</code>.
+Note that a macro can always overwrite these default settings.</p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px">u8 studio<br>
+Handle of the studio.</p>
+
+<p STYLE="margin-left:100px">musicITD<br>
+If <code>TRUE</code>, ITD is enabled for all music voices.</p>
+
+<p STYLE="margin-left:100px">sfxITD<br>
+If <code>TRUE</code>, ITD is enabled for all sfx voices.</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">None.</p>
+</body>
+</html>

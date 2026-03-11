@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<TITLE>LOOP</TITLE>
+</HEAD>
+
+<BODY>
+<H1>LOOP</H1>
+
+<P STYLE="margin-left:100px">Loop back to a macrostep.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Structure</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Keyoff</font></TD>
+	<TD bgcolor=black text=white><font color=white>Random</font></TD>
+	<TD bgcolor=black text=white><font color=white>Sampleend</font></TD>
+	<TD bgcolor=black text=white><font color=white>SoundMacro Step</font></TD>
+	<TD bgcolor=black text=white><font color=white>Times</font></TD>
+	<TD colspan=3 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x05</B></TD>
+	<TD width=100><B><I>LOOP</I></B></TD>
+	<TD width=75><I>key release</I></TD>
+	<TD width=90><I>random</I></TD>
+	<TD width=100><I>sample end</I></TD>
+	<TD width=130><I>step</I></TD>
+	<TD width=75><I>times</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Loop to the specified location within the current macro <I>n</I>-times.
+If one of the flags is set, the loop may execute less than the specified number of times. A value of 
+0xFFFF (65535) will cause an endless loop. Loops may not be nested.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100>key release</TD>
+	<TD width=50>=</TD>
+	<TD>If set to on and a keyoff is recived, the command will not<BR>
+	loop but instead proceed with the next step in the macro.</TD>
+  </TR>
+  <TR>
+	<TD>random</TD>
+	<TD>=</TD>
+	<TD>If set to on, the command will loop a random number of times<BR>
+	where the <B>times</B>parameter specifies the maximum count of loops.</TD>
+  </TR>
+  <TR>
+	<TD>sample end</TD>
+	<TD>=</TD>
+	<TD>If set to on the command will not loop when the sample reaches<BR>
+	its end (note that this works only with one-shot samples).</TD>
+  </TR>
+  <TR>
+	<TD>step</TD>
+	<TD>=</TD>
+	<TD>This defines the macrostep to which the command loops.</TD>
+  </TR>
+  <TR>
+	<TD>times</TD>
+	<TD>=</TD>
+	<TD>The number of loops to be performed. A <B>times</B> value of 0xFFFF<BR>
+	(65535) will cause an endless loop, if none of the other conditions apply.</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

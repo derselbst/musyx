@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>sndSeqPlay</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSeqPlay</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>SND_SEQID sndSeqPlay (SND_GROUPID sgid, SND_SONGID sid, void *arrfile, SND_PLAYPARA *para);</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function starts the playback of a song contained within a song group.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px"><CODE>SND_GROUPID</CODE> sgid<BR>
+Specifies the ID of the song group to be used as a source.</P>
+
+<P STYLE="margin-left:100px"><CODE>SND_SONGID sid</CODE><BR>
+Specifies which sequencer file in the song group is to be used.</P>
+
+<P STYLE="margin-left:100px">void *arrfile<BR>
+Pointer to memory contianing sequencer data. Certain alignment requirements may apply for certain platforms.</P>
+
+<P STYLE="margin-left:100px">SND_PLAYPARA *para<BR>
+Pointer to a <A href="../Defs/SND_PLAYPARA.html" target="view_frame">structure</A> containing various parameters for starting the song. If this pointer is set to <CODE>NULL</CODE>, the song will be started immediately, and no volume will be set. By default, the volume is down.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">The function returns a 32-bit sequencer ID if successful, if not it returns SND_SEQ_ERROR_ID.</P>
+<P>
+
+</BODY>
+</HTML>

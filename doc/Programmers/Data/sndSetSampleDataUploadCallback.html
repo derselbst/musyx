@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>sndSetSampleDataUploadCallback</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSetSampleDataUploadCallback</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>void SNDCALL sndSetSampleDataUploadCallback(void *(*callback)(u32 offset, u32 bytes), u32 chunkSize);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">Install a callback function that will be invoked 
+  by <code>sndPushGroup()</code> when sample data is needed for transfer into 
+  ARAM.</P>
+<P STYLE="margin-left:100px">If a callback function is never registered by your 
+  application, then <code>sndPushGroup()</code> will require that the entire sample 
+  buffer for a given group be present in main memory before pushing that group 
+  onto the <i>sound stack</i>. However, this is often impractical because a sample 
+  set could be several megabytes in length. </P>
+<P STYLE="margin-left:100px">By installing a callback, your application can minimize 
+  the amount of main memory buffer needed to transfer sample data from disk into 
+  ARAM. MusyX will use the callback to 'chunk' or 'stream' the contents of a sample 
+  file into ARAM through a user-defined buffer..</P>
+<P STYLE="margin-left:100px">See <A href="../Data/sndPushGroup.html"><code>sndPushGroup()</code></A> and Basic Architecture's <A href="../info/Basic.html#Data">Data 
+  Management</A> for more details.</P>
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">void *(*callback)(u32 offset, u32 bytes)<br>
+  Function that will be called when MusyX is ready to transfer a chunk of sample 
+  data into ARAM. The function will be invoked with the following arguments: </P>
+<P STYLE="margin-left:150px">u32 offset<br>
+  This is the current offset, in bytes, into the sample data file which is currently 
+  being transferred into ARAM. </P>
+<P STYLE="margin-left:150px">u32 bytes<br>
+  This is the number of bytes needed for the next chunk of data to be transferred 
+  into ARAM. Note that this value will not exceed the chunkSize parameter (see 
+  below). </P>
+<P STYLE="margin-left:100px">The callback is responsible for reading data at the 
+  given offset and length from the appropriate <code>*.sample</code> file. The 
+  callback is also responsible for allocating memory for the buffer from which 
+  MusyX will transfer data into ARAM<code></code>. </P>
+<P STYLE="margin-left:100px">The callback must return a pointer (of type <code>void</code>) 
+  to the buffer containing the current 'chunk' of sample data. MusyX will then 
+  transfer that chunk into ARAM using the ARAM Queue (ARQ) driver.</P>
+<P STYLE="margin-left:100px">If callback is NULL, <code>sndPushGroup()</code> 
+  will assume that the entire sample set is available in main memory and will 
+  transfer it all at once.</P>
+<P STYLE="margin-left:100px">Note that the void *samples argument of <code>sndPushGroup()</code> 
+  must be set to NULL if you register a data upload callback.</P>
+<P STYLE="margin-left:100px">u32 chunkSize<br>
+  The number of bytes to DMA into ARAM per transfer. This value will be rounded 
+  up to the nearest multiple of 32. Note that this value must be equal to or greater 
+  than the chunk size used by ARQ. Please see the <code>ARQGetChunkSize()</code> 
+  and <code>ARQSetChunkSize()</code> functions in the Dolphin reference documentation.</P>
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>

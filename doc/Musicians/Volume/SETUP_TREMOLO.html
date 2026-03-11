@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>SETUP_TREMOLO</TITLE>
+</HEAD>
+
+<BODY>
+<H1>SETUP_TREMOLO</H1>
+
+<P STYLE="margin-left:100px">Control the tremolo effect.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Volume</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Scale</font></TD>
+	<TD bgcolor=black text=white><font color=white>Mod. Scale</font></TD>
+	<TD colspan=7 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x23</B></TD>
+	<TD width=100><B><I>TREMOLO</I></B></TD>
+	<TD width=75><I>Scale</I></TD>
+	<TD width=75><I>Scale</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Sets up tremolo effect. The <B>scale</B> parameter defines the level to which the volume should be decreased at maximum during the tremolo LFO process. The <B>mod.scale</B> parameter controls an additional offset that will be added (when thinking in "dB space") according to the state of the modulation input. If that input is zero, no offset will be added; if it is full (0x3FFF), the complete specified offset will be added. The scale used to influence the volume is calculated as follows:</P>
+
+<P STYLE="margin-left:100px">First, the <B>mod.scale</B> is transformed according to the state of the modulation input (e.g., 100% will be used if the modulation input is zero and the specified value will be used if the modulation is maximized). The <B>scale</B> is determined by the tremolo input (which should be connected to either LFO0 or LFO1 first - please not that it is best to use a phase of 180 degrees as start offset for the LFO's when using temolo to avoid any click sounds). Finally, both modified scales are multiplied with each other and the result is applied to the current volume. Please note that the current volume is only modified momentarily. The actual value accessible to the macro does nto change. A scale of 4096 equals 100% for all parameters. If both scales are 0, the tremolo effect will be switched off.</P>
+<P STYLE="margin-left:100px">Note: Future versions of the editor will abstract thsi to use dB attenuation values.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100 valign=top>scale</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>The "main" scaling factor of the volume.</TD>
+  </TR>
+  <TR>
+	<TD width=100 valign=top>mod.scale</TD>
+	<TD width=50 valign=top>=</TD>
+	<TD>The "modulation" scaling factor of the volume.</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

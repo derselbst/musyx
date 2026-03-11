@@ -1,0 +1,47 @@
+<html>
+
+<head>
+<title>sndAuxCallbackReverbSTD</title>
+</head>
+
+<body>
+
+<h2>sndAuxCallbackReverbSTD</h2>
+
+<p STYLE="margin-left:100px"><code>void sndAuxCallbackReverbSTD(u8 reason, SND_AUX_INFO
+*info, void *user);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This callback function is to be used together with <a
+href="sndSetAuxProcessingCallbacks.html" target="view_frame">sndSetAuxProcessingCallbacks()</a>.
+it implements a lower quality reverb algorithm.</p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px">u8 reason<br>
+Specifies the reason why the callback was invoked. The following codes are defined:</p>
+
+<p STYLE="margin-left:150px">SND_AUX_REASON_BUFFERUPDATE<br>
+Buffers are ready for processing. Buffer pointers are specified in the info structure.</p>
+
+<p STYLE="margin-left:150px">SND_AUX_REASON_PARAMETERUPDATE<br>
+MIDI parameters have been changed. Parameters are stored in the info structure.</p>
+
+<p STYLE="margin-left:100px">SND_AUX_INFO *info<br>
+Pointer to an <a href="../Defs/SND_AUX_INFO.html" target="view_frame">info structure</a>
+containing data needed to properly react to the reason code passed by the caller.
+Depending on the code either the fields in the SND_AUX_BUFFERUPDATE structure or in the
+SND_AUX_PARAMETERUPDATE are valid. </p>
+
+<p STYLE="margin-left:100px">void *user<br>
+This pointer must point to a structure of type <a href="../Defs/SND_AUX_REVERBSTD.html"
+target="view_frame">SND_AUX_REVERBSTD</a> prepared by <a
+href="sndAuxCallbackPrepareReverbSTD.html" target="view_frame">sndAuxCallbackPrepareReverbSTD()</a>.
+</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">None.</p>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html>
+
+<head>
+<title>sndStreamAllocLength</title>
+</head>
+
+<body>
+
+<h2>sndStreamAllocLength</h2>
+
+<p STYLE="margin-left:100px"><code>u32 sndStreamAllocLength(u32 num, u32 flags);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function returns the number of bytes needed in MRAM
+&nbsp; for a stream buffer, containing the specifed number of samples. </p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px">u32 num Number of samples in the buffer.</p>
+
+<p STYLE="margin-left:100px">u32 flags Flag determines the type of stream data.</p>
+
+<p STYLE="margin-left:150px">SND_STREAM_DEFAULT<br>
+This flag will cause the system to allocate a PCM16 stream buffer.</p>
+
+<p STYLE="margin-left:150px">SND_STREAM_ADPCM<br>
+this flag will allocate an ADPCM stream buffer.</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">Size of the buffer that has to be allocated in bytes</p>
+</body>
+</html>

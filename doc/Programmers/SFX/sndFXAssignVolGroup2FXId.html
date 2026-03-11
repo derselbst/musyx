@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<TITLE>sndFXAssignVolGroup2FXId</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndFXAssignVolGroup2FXId</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndFXAssignVolGroup2FXId(SND_FXID fid, u8 vgroup);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function assigns a user-defined volume group to the specified sound effect ID. All sound effects using this ID started after this call will be controlled by the given volume group. If SND_FX_VOLGROUPS is passed, the FX ID is passed back to the default SFX volume group.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_FXID fid<BR>
+FX to which the volume group should be assigned.</P>
+
+<P STYLE="margin-left:100px">u8 vgroup<BR>
+Volume group to be assigned.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">Returns <CODE>TRUE</CODE> if successful, <CODE>FALSE</CODE> if not.</P>
+<P>
+
+</BODY>
+</HTML>

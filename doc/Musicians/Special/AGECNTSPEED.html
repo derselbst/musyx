@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<TITLE>AGECNTSPEED</TITLE>
+</HEAD>
+
+<BODY>
+<H1><B>AGECNTSPEED</B></H1><P>
+
+<P STYLE="margin-left:100px">Set age-counter speed</P>
+
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Special</I></B></P>
+
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black><FONT color=white>Time Until Zero</FONT></TD>
+	<TD colspan=7 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x38</B></TD>
+	<TD width=100><B><I>AGECNTSPEED</I></B></TD>
+	<TD width=125><I>time</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">Changes the speed of the age-counter decrement. By default, the counter will reach zero after about 18 minutes. The <B>time</B> value sets the number of milliseconds the counter will need in order to decrement to zero from its current value. If <B>time</B> is set to zero, the priority counter will not be changed over time at all.</P>
+
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100>time</TD>
+	<TD width=50>=</TD>
+	<TD>The time (0-1080000) in milliseconds to reach 0.</TD>
+  </TR>
+</TABLE>
+	
+<P>
+<P>
+</BODY>
+</HTML>

@@ -1,0 +1,110 @@
+<html>
+
+<head>
+<title>sndStreamAllocEx</title>
+</head>
+
+<body>
+
+<h2>sndStreamAllocEx</h2>
+
+<p STYLE="margin-left:100px"><code>SND_STREAMID sndStreamAllocEx(u8 prio, void *buffer,
+u32 samples, u32 frq, u8 vol, u8 pan, u8 span, u8 auxa, u8 auxb, u8 studio, u32 flags, u32
+(*updateFunction)(void *buffer1, u32 len1, void *buffer2, u32 len2, u32 user), u32 user,
+SND_ADPCMSTREAM_INFO *adpcmInfo);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function allocates a stream buffer in ARAM. By default
+the function will immediately activate the buffer for streaming by allocating a voice. The
+update function will be called in approximately 20ms intervals.</p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px">u8 prio Priority to be used for allocating the voice to be
+used for playing the stream. To guarantee allocation, the priority should be chosen as
+high as possible (255).</p>
+
+<p STYLE="margin-left:100px">void *buffer<br>
+  Pointer to buffer in MRAM allocated by the application. The neccesary size can 
+  be retrieved by calling <a href="sndStreamAllocLength.html" target="view_frame">sndStreamAllocLength()</a>.</p>
+
+<p STYlE="margin-left:100px">u32 samples<br>
+Length of the ring buffer in samples.</p>
+
+<p STYlE="margin-left:100px">u32 frq<br>
+Stream frequency in Hz.</p>
+
+<p STYlE="margin-left:100px">u8 vol<br>
+Volume used for playback (0-127).</p>
+
+<p STYlE="margin-left:100px">u8 pan<br>
+Stereo panning used for playback (0-127).</p>
+
+<p STYlE="margin-left:100px">u8 span<br>
+Surround panning used for playback (0-127).</p>
+
+<p STYLE="margin-left:100px">u8 auxa<br>
+AuxA volume.</p>
+
+<p STYLE="margin-left:100px">u8 auxb<br>
+Auxb volume.</p>
+
+<p STYLE="margin-left:100px">u8 studio<br>
+Studio in which the stream should be played.</p>
+
+<p STYLE="margin-left:100px">u32 flags<br>
+Any combination (unless noted otherwise) of the following flags are allowed:</p>
+
+<p STYLE="margin-left:150px">SND_STREAM_DEFAULT<br>
+Allocate and activate PCM16 stream.</p>
+
+<p STYLE="margin-left:150px">SND_STREAM_ADPCM<br>
+The stream is in ADPCM format.</p>
+
+<p STYLE="margin-left:150px">SND_STREAM_INACTIVE<br>
+A buffer in ARAM will be allocated, but no voice will be allocated yet. A subsequent call
+to <a href="sndStreamActivate.html" target="view_frame">sndStreamActivate()</a> can be
+used to activate playback. This can prevent fragmentation of ARAM memory.</p>
+
+<p STYLE="margin-left:150">SND_STREAM_MANUALARAMUPD<br>
+  By default, MusyX will transfer stream data provided by the application from 
+  MRAM into ARAM during the update callback. This flag will disable this behavior 
+  so that the application may use some other event to trigger the ARAM transfer. 
+  The application must use <a
+href="sndStreamARAMUpdate.html" target="view_frame">sndStreamARAMUpdate()</a> 
+  to manually transfer data from MRAM into ARAM.</p>
+<p STYlE="margin-left:100px">u8 (*update_function)(void *buffer1, u32 len1, void *buffer2,
+u32 len2, u32 user)<br>
+Pointer to a function that will be called by MusyX each time that the buffer has to be
+updated. <i>Buffer1</i> and <i>len1</i> define the first area to be updated, while <i>buffer2</i>
+and <i>len2</i> define the second area. Two areas are necessary, since the buffer is used
+as a ring buffer, and the area to be updated may wrap around. <i>Len2</i> will be zero if
+no second area is needed. <i>User</i> is a value specified by the application.</p>
+
+<p STYlE="margin-left:100px">u32 user<br>
+User-defined value to be passed to the update function.</p>
+
+<p STYLE="margin-left:100px">SND_STREAMADPCM_INFO *adpcmInfo<br>
+Pointer to a structure containing the ADPCM coefficients needed to play the ADPCM stream.
+If the stream is PCM16 format or not immediately activated, this pointer may be NULL. The
+structure has the following format:</p>
+
+<p STYLE="margin-left:100px"><font face="Courier New">&nbsp; typedef struct
+SND_ADPCMSTREAM_INFO <br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s16 coefTab[8][2]; // Table of coef. pairs<br>
+<br>
+&nbsp; } SND_ADPCMSTREAM_INFO;</font><br>
+</p>
+
+<p STYLE="margin-left:100px">Note that the NINTENDO GAMECUBE SDK contains a command-line
+tool (DSPADPCM.EXE) for converting WAV or AIFF data into DSP-ADPCM format. This tool will
+generate the coefficient data needed for the adpcmInfo structure.</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">The function returns a handle to the stream if successful and
+<code>SND_ID_ERROR</code> if not.</p>
+</body>
+</html>

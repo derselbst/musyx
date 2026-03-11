@@ -1,0 +1,25 @@
+<HTML>
+<HEAD>
+<TITLE>sndFXPitchBend</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndFXPitchBend</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndFXPitchBend(SND_VOICEID vid, u16 pb);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">This function sets a new pitch bend value for the specified sound effect. The default pitch bend value set after start is 0x2000. (0x2000=No pitch offset, lower values=pitch down, higher values=pitch up).</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">SND_VOICEID vid<BR>
+The voice ID obtained through <A href="sndFXStart.html" target="view_frame">sndFXStart</A> or <A href="sndFXStartEX.html" target="view_frame">sndFXStartEX</A>.</P>
+
+<P STYLE="margin-left:100px">u16 pb<BR>
+The new pitch bend value to be applied to the effect.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">If the SFX is active, the function will return its handle. If not, SND_ID_ERROR will be returned. Even the latter value may be passed to all SFX functions without any negative side effects.</P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<TITLE>Variables</TITLE>
+</HEAD>
+<H2>Variables</H3><P>
+<LIST>
+	<LI>The user can choose from 16 local and 16 global variables. Local variables have indices
+	0-15, and global variables have indices 16-31<P>
+	<LI>Global variables are shared by all macros; even the game application can access them.<P>
+	<LI>Local variables are  unique to a specific macro. The are initialized to zero when the 
+	macro starts.<P>
+	<LI>Variables may be assigned to MIDI controllers, and vice versa. Reading MIDI controller 		values simply copies them into the variable representation of a signed 32-bit number. No 
+	conversion whatsoever takes place. For example, a 0x2000-centered controller (like the 		pitchbend) will not be converted as a signed number, which would be more appropriate to its
+	logical function, but remains unsingned. The user will have to handle the conversion manually if 		necessary. The same is true if a value is written to a MIDI controller. No automatic conversion
+	takes place. Note: When working with MIDID controllers in the context of variables, MIDI 		controllers are alwasy represented in 14-bit format (as a "hires" controller so to speak). E.g. 		the main volume controller will have a range of [0..0x3F80], not [0..0x7F]. Variable values are
+	clamped to the [0..0x3FFF] range which is valid for 14-bit "hires" MIDI controllers when 
+	assigned to them.<P>
+	<LI>Since they are 32 bits wide, variables can, by design, store VIDs (Voice IDs). The user must
+	be aware of the fact that only a comparison with "equal" or a simple assignment will yield 
+	correct results for this actually unsigned number.<P>
+</LIST>
+
+</BODY>
+</HTML>

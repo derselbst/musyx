@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>SND_LISTENER</TITLE>
+</HEAD>
+
+<BODY>
+<H3>SND_LISTENER</H3><P>
+
+<PRE>
+typedef struct SND_LISTENER {
+
+	struct SND_LISTENER	*next;
+	struct SND_LISTENER	*prev;
+	SND_ROOM		*room;
+				
+	u32			flags;
+	SND_FVECTOR		pos;
+	SND_FVECTOR		dir;    // Speed in units/second
+	SND_FVECTOR		heading;
+	SND_FVECTOR		right;
+	SND_FVECTOR		up;
+	SND_FMATRIX		mat;
+	f32			surroundDisFront;
+	f32			surroundDisBack;
+	f32			soundSpeed;
+	f32			vol;
+			
+	} SND_LISTENER;
+
+</PRE>
+</BODY>
+</HTML>
+

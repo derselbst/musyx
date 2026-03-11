@@ -1,0 +1,38 @@
+<html>
+
+<head>
+<title>sndOutputMode</title>
+</head>
+
+<body>
+
+<h2>sndOutputMode</h2>
+
+<p STYLE="margin-left:100px"><code>void sndOutputMode(SND_OUTPUTMODE mode)</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function sets the system to mono, stereo, or surround.</p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px"><code>SND_OUTPUTMODE</code> mode<br>
+Selects the output mode. The default mode is stereo.</p>
+
+<p STYLE="margin-left:150px"><code>SND_OUTPUTMODE_MONO</code>: All sounds are panned
+equally between left and right channels.</p>
+
+<p STYLE="margin-left:150px"><code>SND_OUTPUTMODE_STEREO</code>: Provides stereo output
+for all sounds panned to left, right, or surround channels.</p>
+
+<p STYLE="margin-left:150px"><code>SND_OUTPUTMODE_SURROUND</code>: Provides
+surround-encoding for sounds that are panned to the surround channel. </p>
+
+<p STYLE="margin-left:100px">Please note that switching between modes may cause a small
+pop or click artifact.</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">None.</p>
+</body>
+</html>

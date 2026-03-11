@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<TITLE>sndAddStudioInput</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndAddStudioInput</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>bool sndAddStudioInput(u8 studio, SND_STUDIO_INPUT *in_desc);</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function specifies the destination studio to which the source must be added.</P>
+
+<P STYLE="margin-left:100px">The destination studio is specified by the u8 studio parameter. The source studio is specified in the SND_STUDIO_INPUT *in_desc <A href="../Defs/SND_STUDIO_INPUT.html" target:"view_frame">structure</A>.</P>
+
+<P STYLE="margin-left:100px">The source studio is processed with its own set of AUX effects (as specified by <A href="../auxiliary/sndSetAuxProcessingCallbacks.html" target="view_frame">sndSetAuxProcessingCallbacks()</A>). The contents of the source studio's main bus are then distributed to the main, AuxA, and AuxB busses of the destination studio.</P>
+
+<P STYLE="margin-left:100px">When the destination studio is processed, the contents of the source studio will 'inherit' the Aux effects asociated with the destination studio.</P>
+
+<P STYLE="margin-left:100px">The source studio must have been previously activated using the <A href="sndActivateStudio.html" target="view_frame">sndActivateStudio()</A> function. The master mix attribute of the source studio must be set to <CODE>FALSE</CODE>.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">u8 studio<BR>
+This is a user-defined value between 1 and 8. This value specifies a unique, previously activated <I>destination</I> studio.</P>
+
+<P STYLE="margin-left:100px">SND_STUDIO_INPUT *in_desc<BR>
+Pointer to a <A href="../Defs/SND_STUDIO_INPUT.html" target="view_frame">structure</A> which describes how a studio should be added to the specified destination studio.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">The function returns <CODE>TRUE</CODE> if it successfully directed the output of the source studio into the destination studio. The function returns <CODE>FALSE</CODE> if it failed.</P>
+
+<H3>Related:</H3>
+<P STYLE="margin-left:100px"><A href="../auxiliary/sndSetAuxProcessingCallbacks.html" target="view_frame">sndSetAuxProcessingCallbacks</A>.</P>
+
+</BODY>
+</HTML>

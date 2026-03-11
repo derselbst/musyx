@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<TITLE>Basic Architecture</TITLE>
+</HEAD>
+
+<BODY>
+<H3><CENTER><FONT color=blue>Musy</FONT><FONT color=red>X</FONT> Basic 
+Architecture</CENTER></H3><HR>
+
+MusyX is divided into these subsystems:
+<UL>
+	<LI><A href="Basic.html#Sequencer">Sequencer</A></LI>
+	<LI><A href="Basic.html#SFX">Basic SFX API</A></LI>
+	<LI><A href="Basic.html#3D">3D SFX API</A></LI>
+	<LI><A href="Basic.html#Streaming">Streaming related functions</A></LI>
+	<LI><A href="Basic.html#Volume">Volume handling</A></LI>
+	<LI><A href="Basic.html#Data">Data managment</A></LI>
+</UL>
+
+This list does not contain the synthesizer because the programmer never 
+interacts with it directly. At all times, either the sequencer, SFX API, 
+or streaming functions abstracts the synthesizer from the programmer.
+
+<UL>
+	<LI><B><A href="../contents.html#Sequencer" 
+target="navigate_frame" name="Sequencer">Sequencer</A></B> - The MusyX 
+sequencer supports up to eight instances. This means that up to eight 
+songs can be played back simultaneously. This is useful for cross fading 
+between two pieces of music, or for pausing a song while another takes 
+over.<P>
+
+Each instance of the sequencer can handle up to 64 tracks (although 16 
+will be commonly used). Each of these tracks can be assigned a different 
+volume group and in addition can be muted or demuted (muted tracks 
+consume much less calculation time than tracks with volume zero). Also, 
+the programmer can change the playback speed of each instance.<P>
+
+A sequencer instance may be stopped or paused at any given moment. 
+Paused sequencers can be restarted at the exact position at which they 
+had been paused. Note: sustained notes that were issued keyoff when 
+paused will not be restarted, so, depending on the nature of the music, 
+the restart may not be as smooth as restarting a CD player. Also 
+suported are several modes to cross fade songs into each other. 
+Programmers can select to continue, start, or stop instances of the 
+sequencer at the moment the fade ends.<P>
+
+The start of the fade can also be synchronized to special events in the 
+score. One MIDI controller has been reserved to mark locations in the 
+score. A fade synchronized by this controller will be started as soon as 
+the controller is set. This way the musician can pinpoint locations in 
+the song where cross fade sounds best.</LI><P>
+
+	<LI><B><A href="../contents.html#SFX" target="navigate_frame" 
+name="SFX">SFX API</A></B> - The SFX API's provide complete control over 
+SFX playback and parameters.</LI><P>
+
+	<LI><B><A href="../contents.html#3D" target="navigate_frame" 
+name="3D">3D API</A></B> - The 3D API is seperate from the internal 
+system. It uses the SFX API to implement the spatial positioning of 
+sounds. It can be seperately maintained, and the source code can be 
+passed on to other developers so that they can implement their own 
+version if they want.<P>
+
+The 3D API uses a model describing the world using emitter and listener 
+objects. While the model allows for multiple listeners, the complete 
+feature set is only supported if just one listener is enabled.<P>
+
+Each object has a position, a direction, speed, and in the case of the 
+listener, a separate orientation (of the head or camera). Together with 
+additional parameters, the system emulates most aspects of 3D audio 
+positioning. Volume, panning ITD, filtering, and pitch shifts (Doppler 
+effect) are used to make the illusion as perfect as possible. The 
+application is responsible for allocating the storage for the objects. 
+The system itself does not impose any direct limitations on the number 
+of objects in any given scene.<P>
+
+The API's also include functions to provide the basic means to implement 
+multiple rooms. Each room can have its own reverb steup and even doors 
+are simulated between them using volume attenuation and filtering.</LI><P>
+
+	<LI><B><A href="../contents.html#Streaming" 
+target="navigate_frame" name="Streaming">Streaming</A></B> - There are two different types of audio streaming: software streaming and streaming from the optical disk.<P>
+
+Streaming from the disk actually bypasses MusyX. A seperate library in the Dolphin SDK (called DTK - <B>D</B>isc <B>T</B>rac<B>k</B> Player) provides details for using this method. Source code is provided</P>
+
+The other type of streaming involves MusyX to a greater extent, and is much more flexible. It uses an underlying feature of MusyX: a voice can be allocated to playback audio data without any sample known to the system. To get the actual audio data the system will call a function that has to be registered by the application first. During this callback, the application has to provide the necessary sample data to MusyX. Where that data comes from is of no concern tot he basic system. Software streaming in MusyX supports both 16-bit PCM and ADPCM. See the <A href="../contents.html#Streaming" target="navigate_frame">streaming</A> functions in the reference.
+
+
+<P></LI>
+
+	<LI><B><A href="../contents.html#Volume" target="navigate_frame" 
+name="Volume">Volume</A></B> - Volume control is organized in three 
+layers. The top layer is the master volume control. There are two master 
+volume controls, one for music and one for SFX. Both can either set the 
+new volume immediately or fade to a new volume level in a given time.<P>
+
+The volume groups form the next layer. Each volume group features two 
+faders. This enables you to manage volume changes like cross fades using 
+a simple logic, while at the same time, other volume changes can take 
+place. For example, a cross fade could be active and the player could 
+enter a pause menu in which the overall volume should be lowered.<P>
+
+The lowest layer is formed by the MIDI volume controls. These controls 
+do not feature support for fades. They can only be set to a new 
+level.</LI><P>
+
+	<LI><B><A href="../contents.html#Data" target="navigate_frame" 
+name="Data">Data Management</A></B> - This component is based on groups, 
+and a central sound stack. While no actual data are put onto the stack, 
+the stack is used to manage teh data, which is passed to the system. 
+MusyX usually does not copy any data that is made known to it. The only 
+exception is sample data. On Dolphin, sample data must be copied into 
+ARAM. The data can be removed from main RAM as soon as all groups 
+referenceing that data are pushed onto the stack. All other data must 
+stay in RAM and may not be moved around after being made known to the 
+system. Song data only has to be present in main RAM as long as any 
+synthesizer instance is using it.<P>
+
+The reason for implementing a stack structure is that any memory fragmentation can easily be avoided. Since any garbage collection inside the ARAM would take a long time, this is very important. The stack structure offers great ways to organize data to be exchanged during game play. A basic set of SFX and jingles that are used throughout a game could remain on the stack, while effects for special situations could be added on top when the game calls for them. Since musyX keeps track of all data already known to it, and only needs additional data to add further groups to the stack, you can even use this system to load data in pieces. This would minimize the impact of passing large amouts of data through main RAM. This type of operation is dependent on preparations during the data conversion process.</LI><P>
+</UL>
+
+<P>
+<P>
+<BODY>
+</HTML>

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>SPLITKEY</TITLE>
+</HEAD>
+
+<BODY>
+<H1>SPLITKEY</H1>
+
+<P STYLE="margin-left:100px">Splits the macro flow depending on the MIDI key.</P>
+<BR>
+<P STYLE="margin-left:50px"><B>Type: <I>Structure</I></B></P>
+
+<TABLE cellspacing=0 cellpadding=3 border STYLE="margin-left:50px">
+   <TR>
+	<TD colspan=2 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+	<TD bgcolor=black text=white><font color=white>Keynumber</font></TD>
+	<TD bgcolor=black text=white><font color=white>SoundMacro ID</font></TD>
+	<TD bgcolor=black text=white><font color=white>SoundMacro Step</font></TD>
+	<TD colspan=5 bgcolor=black><img src="SinglePix.gif" height=20></TD>
+   </TR>
+   <TR border=3>
+	<TD width=50><B>0x02</B></TD>
+	<TD width=100><B><I>SPLITKEY</I></B></TD>
+	<TD width=75><I>key</I></TD>
+	<TD width=125><I>macro</I></TD>
+	<TD width=125><I>step</I></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+	<TD width=50 bgcolor=gray><img src="SinglePix.gif" height=17></TD>
+   </TR>
+</TABLE>
+
+<P STYLE="margin-left:50px"><B>Description:</B></P>
+<P STYLE="margin-left:100px">This command is used to change the flow of execution conditionally in the current macro. The macro program will jump to the given macrostep inside the specified macro, if the current key is higher than or equal to the key parameter.</P>
+
+<P STYLE="margin-left:50px"><B>Parameters:</B></P>
+
+<TABLE cellspacing=10 cellpadding=3 STYLE="margin-left:100px">
+  <TR>
+	<TD width=100>key</TD>
+	<TD width=50>=</TD>
+	<TD>This parameter specifies a key number (0-127) to compare<BR>
+	against. If the key you play is higher or the same as this key, the<BR>
+	macro will jump, otherwise it resumes.</TD>
+  </TR>
+  <TR>
+	<TD>macro</TD>
+	<TD>=</TD>
+	<TD>The ID of the target macro</TD>
+  </TR>
+  <TR>
+	<TD>step</TD>
+	<TD>=</TD>
+	<TD>The step number inside the target macro.</TD>
+  </TR>
+</TABLE>
+<P>
+<P>
+
+</BODY>
+</HTML>

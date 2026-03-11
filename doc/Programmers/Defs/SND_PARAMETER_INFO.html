@@ -1,0 +1,22 @@
+<HTML>
+<HEAD>
+<TITLE>SND_PARAMETER_INFO</TITLE>
+</HEAD>
+
+<BODY>
+<H3>SND_PARAMETER_INFO</H3><P>
+
+<PRE>
+
+typedef struct SND_PARAMETER_INFO {
+	u8		numPara;	// How many MIDI controller values (ID,value - value may be 8-bit or 16-bit!)
+	<A href="SND_PARAMETER.html" target="view_frame">SND_PARAMETER</A>	*paraArray;	// Parameter data...
+				
+	} SND_PARAMETER_INFO;
+</PRE>
+
+<I>numPara</I> defines how many MIDI controllers are to be set.<BR>
+<I>paraArray</I> has to point to a list of these parameters. For each of these controllers, the controller ID and the value has to be specified. The value may be 7-bit or 14-bit depending on the controller ID.<P>
+</BODY>
+</HTML>
+

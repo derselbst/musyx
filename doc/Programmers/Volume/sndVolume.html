@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+<TITLE>sndVolume</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndVolume</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>void sndVolume (u8 volume, u16 time, u8 volgroup)</CODE></P>
+
+<H3>Purpose:</H3><P>
+
+<P STYLE="margin-left:100px">This function sets the current volume for any volume groups. The volume may be set at once or may be faded to the new setting. A fade does not need to be finished before a new one can be started.</P>
+
+<H3>Input:</H3><P>
+<P STYLE="margin-left:100px">u8 volume<BR>
+Specifies the volume to be used for set/fade. <CODE>0</CODE>=Silence, <CODE>127</CODE>=100%.</P>
+
+<P STYLE="margin-left:100px">u16 time<BR>
+Specifies the time in ms to fade to the new volume. If zero is specified, the volume will be set immediately. This may result in clicking sounds.</P>
+
+<P STYLE="margin-left:100px">u8 volgroup</BR>
+Specifies which volume group is to be changed. You may also specify one of the constants below to modify a set of volume groups at one time, while only using one call.</P>
+
+<P STYLE="margin-left:100px"><A href="../Defs/VolGroups.html" target="view_frame">SND_USERMUSIC_VOLGROUPS</A><BR>
+<A href="../Defs/VolGroups.html" target="view_frame">SND_USERFX_VOLGROUPS</A><BR>
+<A href="../Defs/VolGroups.html" target="view_frame">SND_USERALL_VOLGROUPS</A></P>
+
+<P STYLE="margin-left:100px">Set a new volume for all music, sfx or both volume groups, defined by the user.</P>
+
+<P STYLE="margin-left:100px"><A href="../Defs/VolGroups.html" target="view_frame">SND_MUSIC_VOLGROUPS</A><BR>
+<A href="../Defs/VolGroups.html" target="view_frame">SND_FX_VOLGROUPS</A><BR>
+<A href="../Defs/VolGroups.html" target="view_frame">SND_ALL_VOLGROUPS</A></P>
+
+<P STYLE="margin-left:100px">Set a new volume for all music, sfx or both volume groups, predefined by the user.</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>

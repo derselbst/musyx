@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>sndStreamADPCMParameter</title>
+</head>
+
+<body>
+
+<h2>sndStreamADPCMParameter</h2>
+
+<p STYLE="margin-left:100px"><code>void sndStreamADPCMPParameter(SND_STREAMID stid,
+SND_ADPCMSTREAM_INFO *adpcmInfo);</code></p>
+
+<h3>Purpose:</h3>
+
+<p STYLE="margin-left:100px">This function changes the ADPCM parameters for a 
+  given stream.. The new parameters will take effect on the next (5msec) audio 
+  frame. </p>
+<p STYLE="margin-left:100px">This function may be invoked from within the update 
+  callback for a given (ADPCM) stream. The application must ensure that the given 
+  stream is 'quiescent'. In other words, the application must ensure that the 
+  stream is silent before changing the ADPCM parameters and providing new data.</p>
+
+<h3>Input:</h3>
+
+<p STYLE="margin-left:100px">u32 stid<br>
+  Handle of stream to be manipulated. The stream must be MONO.</p>
+
+<p STYLE="margin-left:100px">SND_ADPCMSTREAM_INFO *adpcmInfo<br>
+Pointer to a structure containing the ADPCM coefficients needed to playback the ADPCM
+stream.. The structure has the following format:</p>
+
+<p STYLE="margin-left:100px"><font face="Courier New">&nbsp; typedef struct
+SND_ADPCMSTREAM_INFO <br>
+&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s16 coefTab[8][2]; // Table of coef. pairs<br>
+<br>
+&nbsp; } SND_ADPCMSTREAM_INFO;</font><br>
+</p>
+
+<p STYLE="margin-left:100px">Note that the NINTENDO GAMECUBE SDK contains a command-line
+tool (DSPADPCM.EXE) for converting WAV or AIFF data into DSP-ADPCM format. This tool will
+generate the coefficients needed to initialize the adpcmInfo structure.</p>
+
+<h3>Output:</h3>
+
+<p STYLE="margin-left:100px">None.</p>
+</body>
+</html>

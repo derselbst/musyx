@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<TITLE>sndSetAuxProcessingCallbacks</TITLE>
+</HEAD>
+
+<BODY>
+<H2>sndSetAuxProcessingCallbacks</H2><P>
+
+<P STYLE="margin-left:100px"><CODE>
+void sndSetAuxProcessingCallbacks(u8 studio, void (*auxA)(u8 reason, SND_AUX_INFO *info, void *user), void *userA, u8 midiA, 
+SND_SEQID seqIDA, void (*auxB)(u8 reason, SND_AUX_INFO *info, void *user), void *userB, u8 midiB, SND_SEQID seqIDB);</CODE></P>
+
+<H3>Purpose:</H3><P>
+<P STYLE="margin-left:100px">MusyX allows registering users effects handling to be registered with each studio context. All data passed through the Aux A and/or Aux B busses of the specified studio will be passed through whatever effect engine is 
+implemented by the user defined callback functions specified. The effect in question may be a special type of reverb, distortion, or anything else that can be done to digital audio signals. The funcitons have to handle 3 channels (left, right, surround) 
+of signed 32-bit audio (24-bits used) at 32KHz, 5ms data at a time.</P>
+
+<H3>Input:</H3>
+<P STYLE="margin-left:100px">u8 studio<BR>
+Studio for which aux bus callbacks should be modified.</P>
+
+<P STYLE="margin-left:100px"><A name="function">void (*auxA)(u8 reason, SND_AUX_INFO *info, void *user)</A><BR>
+Pointer to a function to be called when 5ms worth of data has to be processed for AUX A. NULL deactivates the callback.</P>
+
+<P STYLE="margin-left:100px">The callback function's parameters are as follows:</P>
+
+
+<P STYLE="margin-left:150px">u8 reason<BR>
+Specifies the reason why the callback was invoked. The following codes are defined:</P>
+
+
+<P STYLE="margin-left:200px">SND_AUX_REASON_BUFFERUPDATE<BR>
+Buffers are ready for processing. Buffer pointers are specified in the info structure.</P>
+
+<P STYLE="margin-left:200px">SND_AUX_REASON_PARAMETERUPDATE<BR>
+MIDI parameters have been changed. Parameters are stored in the info structure.</P>
+
+<P STYLE="margin-left:150px">SND_AUX_INFO *info<BR>
+Pointer to an <A href="../Defs/SND_AUX_INFO.html" target="view_frame">info structure</A>
+containing data needed to properly react to the reason code passed by the caller. 
+Depending on the code either the fields in the SND_AUX_BUFFERUPDATE structure or in the 
+SND_AUX_PARAMETERUPDATE are valid.
+
+<P STYLE="margin-left:100px">void *userA<br>
+  Pointer to data structure or other construct needed by the effects algorithm. 
+  The reverb, chorus, and delay effects provided by MusyX use this argument as 
+  a pointer to a structure which describes the parameters of a particular effect. 
+  This argument will be passed to the algorithm associated with the AuxA bus.</P>
+<P STYLE="margin-left:100px">u8 midiA<br>
+  Reserved for future use. (Currently unused)<BR>
+</P>
+<P STYLE="margin-left:100px">SND_SEQID seqIDA<br>
+  Reserved for future use. (Currently unused)<BR>
+</P>
+
+<P STYLE="margin-left:100px">void (*auxB)(u8 reason, SND_AUX__INFO *info, void *user)<BR>
+Pointer to a function to be called when 5ms worth of data has to be processed for AUX B. NULL deactivates the callback.
+The parameters are the same as the function for AUX A <A href="#function">above</A>.</P>
+
+<P STYLE="margin-left:100px">void *userB<br>
+  Pointer to data structure or other construct needed by the effects algorithm. 
+  The reverb, chorus, and delay effects provided by MusyX use this argument as 
+  a pointer to a structure which describes the parameters of a particular effect. 
+  This argument will be passed to the algorithm associated with the AuxB bus. 
+  <BR>
+</P>
+
+<P STYLE="margin-left:100px">u8 midiB<br>
+  Reserved for future use. (Currently unused)<BR>
+</P>
+
+<P STYLE="margin-left:100px">SND_SEQID seqIDB<br>
+  Reserved for future use. (Currently unused)<BR>
+</P>
+
+<H3>Output:</H3>
+<P STYLE="margin-left:100px">None.</P>
+<P>
+
+</BODY>
+</HTML>
