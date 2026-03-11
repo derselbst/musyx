@@ -552,18 +552,22 @@ static void byteswapArrData(uint8_t* arr, std::size_t size, std::size_t paddingS
       }
 
       while (te + TENTRY_SIZE <= end && te < pTabLimit) {
-        const uint16_t pat = readBE16(te + 0x08); // still BE at te >= hwm
+        // Read the pattern field before swapping – entries at or beyond the hwm
+        // have not yet been byte-swapped so the bytes are still big-endian.
+        uint8_t* cur = te;
+        const uint16_t pat = readBE16(cur + 0x08);
 
-        bswap32p(te + 0x00); // time (u32)
-        bswap16p(te + 0x08); // pattern (u16)
+        bswap32p(cur + 0x00); // time (u32)
+        bswap16p(cur + 0x08); // pattern (u16)
 
         te += TENTRY_SIZE;
         if (hwm == nullptr || te > hwm) hwm = te;
 
         if (pat == 0xFFFF) break;
         if (pat == 0xFFFE) {
-          // Loop-back: the two s8 bytes encode a u16 loop-back index BE.
-          bswap16p(te - TENTRY_SIZE + 0x0A);
+          // Loop-back: bytes 10–11 of this TENTRY encode a u16 TENTRY index
+          // in big-endian order; swap them to native LE for the runtime.
+          bswap16p(cur + 0x0A);
         }
       }
     }
